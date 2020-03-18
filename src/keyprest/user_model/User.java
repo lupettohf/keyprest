@@ -20,7 +20,7 @@ public class User implements Serializable{
 	public void setUserID(int UserID) { this.UserID = UserID; }
 	
 	public String getUsername() { return Username; }
-	public void setUsername() 
+	public void setUsername() {}
 	
 	
 	}

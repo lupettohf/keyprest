@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -17,14 +18,22 @@ import keyprest.database.connectionManager;
 
 public class login_handler extends HttpServlet {
 
-	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato*/
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
-		/* TODO:  finis
+		HttpSession session = request.getSession();
+		
 		try {
-			if(doLogin(Username, Password)) { Session.setAttribute("username", Username);}
+			/* TODO: feedback in caso di login negativo */
+			if(doLogin(Username, Password)) { session.setAttribute("username", Username); }
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
