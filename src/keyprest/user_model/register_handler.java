@@ -19,8 +19,15 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 @WebServlet("/register")
 public class register_handler extends HttpServlet{
+	
 	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato*/
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		// Mostra la pagina di registrazione nel caso vine fatto accesso diretto alla servelet. 
+		RequestDispatcher req = request.getRequestDispatcher("register.jsp");
+		req.include(request, response);
+	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Username = request.getParameter("username");
@@ -54,8 +61,8 @@ public class register_handler extends HttpServlet{
 		/* Primo stage controlli: campi vuoti/password non uguali.
 		 * Richiede anche verifica client-side per informare l'utente dell'eventuale errore. 
 		 */
-		if(Username.isEmpty() || Password.isEmpty() || EMail.isEmpty() || (Password.contentEquals(Password_confirm))) {return false;}
-		/* Controllo che mail e username contengano caratteri validi e rispettino le lunghezze */
+		if(Username.isEmpty() || Password.isEmpty() || EMail.isEmpty()|| !Password.equals(Password_confirm)) {return false;}
+		/* Controllo che mail e username contengano caratteri validi e rispettino le lunghezze (L<30 L>3)*/
 		if(!validators.ValidateEmail(EMail) || !validators.ValidateUsername(Username)) { return false; }
 		
 		String HashedPassword = DigestUtils.sha256Hex(Password + GLOBAL_SALT); 

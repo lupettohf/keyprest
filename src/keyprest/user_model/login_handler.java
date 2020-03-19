@@ -28,6 +28,13 @@ public class login_handler extends HttpServlet {
 	
 	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato */
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		// Mostra la pagina di login nel caso vine fatto accesso diretto alla servelet. 
+		RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+		req.include(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
