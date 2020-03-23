@@ -17,16 +17,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.catalina.Session;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
-@WebServlet("/login")
-public class login_handler extends HttpServlet {
+@WebServlet(name = "Login_handler", urlPatterns = {"/login"})
+public class Login_handler extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -39,35 +38,27 @@ public class login_handler extends HttpServlet {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
 		HttpSession session = request.getSession();
+		RequestDispatcher req = request.getRequestDispatcher("user.jsp");;
 		
 		try {
-			/* TODO: feedback in caso di login negativo */
 			if(doLogin(Username, Password)) { 
 				session.setAttribute("username", Username); 
-				RequestDispatcher req = request.getRequestDispatcher("user.jsp");
-				
-				req.include(request, response);
 				
 			} else {
 				// Reindirizza al login nel caso i dati sono errati
-				RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+				req = request.getRequestDispatcher("login.jsp");
 				
 				// Setta il testo dell'errore nella sessione
 				session.setAttribute("error", "Login Failed");
-				
-				req.include(request, response);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		req.include(request, response);
 	}
 	
-	public boolean doLogin(String Username, String Password) throws ClassNotFoundException, SQLException
+	public boolean doLogin(String Username, String Password) throws SQLException
 	{
 		String QUERY = "SELECT * FROM users" + 
 				"         WHERE EXISTS(select 1 from users where username = ? OR mailaddr = ? )" + 
@@ -75,7 +66,7 @@ public class login_handler extends HttpServlet {
 		
 		if(Username.isEmpty() || Password.isEmpty()) { return false; }
 		
-		String HashedPassword = DigestUtils.sha256Hex(Password + GLOBAL_SALT); 
+		String HashedPassword = DigestUtils.sha256Hex(Password + Globals.SALT); 
 		
 		connectionManager.createConnection();
 		

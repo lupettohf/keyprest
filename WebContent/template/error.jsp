@@ -1,6 +1,6 @@
 <%
 String errorMsg = (String) session.getAttribute("error");
-if (null !=errorMsg) { %> <h4> <%= errorMsg %></h4> <%}
+if (null !=errorMsg) { %> <h4 style="color: red;"> <%= errorMsg %></h4> <%}
 %>
 
 <% 

@@ -1,6 +1,6 @@
 package keyprest.utils;
 
-public class validators {
+public class Validators {
 
 	public static boolean ValidateUsername(String Username)
 	{

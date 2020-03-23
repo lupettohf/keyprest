@@ -7,16 +7,14 @@ import java.sql.SQLException;
 public class connectionManager {
 	public static Connection databaseConnection;
 	
-	public static void createConnection() throws ClassNotFoundException, SQLException {
+	public static void createConnection(){
+		try {
+			databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/my_keys?useSSL=false", "andrea", "xx");
+		} catch (SQLException e) {
+			// TODO: Autogenerato, da cambiare
+			e.printStackTrace();
+		}
 		
-		/* TODO: Rimuovere con aggiornamento.
-		 *  In the past, it was required to load a JDBC driver before creating a java.sql.Connection. 
-		 *  Nowadays, when using JDBC 4.0 drivers, this is no longer required and Class.forName() can be safely 
-		 *    removed because JDBC 4.0 (JDK 6) drivers available in the classpath are automatically loaded.
-		 */
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/my_keys?useSSL=false", "andrea", "xx");
 		
 	}
 	

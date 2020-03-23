@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/logout")
-public class logout_handler extends HttpServlet{
+public class Logout_handler extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException
 	{

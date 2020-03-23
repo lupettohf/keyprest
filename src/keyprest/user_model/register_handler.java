@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import keyprest.utils.validators;
+import keyprest.utils.Validators;
+import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
 import javax.servlet.RequestDispatcher;
@@ -17,10 +18,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-@WebServlet("/register")
-public class register_handler extends HttpServlet{
-	
-	String GLOBAL_SALT = ""; /* TODO: questo deve essere spostato*/
+@WebServlet(name = "Register_handler", urlPatterns = {"/register"})
+public class Register_handler extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -63,9 +62,9 @@ public class register_handler extends HttpServlet{
 		 */
 		if(Username.isEmpty() || Password.isEmpty() || EMail.isEmpty()|| !Password.equals(Password_confirm)) {return false;}
 		/* Controllo che mail e username contengano caratteri validi e rispettino le lunghezze (L<30 L>3)*/
-		if(!validators.ValidateEmail(EMail) || !validators.ValidateUsername(Username)) { return false; }
+		if(!Validators.ValidateEmail(EMail) || !Validators.ValidateUsername(Username)) { return false; }
 		
-		String HashedPassword = DigestUtils.sha256Hex(Password + GLOBAL_SALT); 
+		String HashedPassword = DigestUtils.sha256Hex(Password + Globals.SALT); 
 		
 		connectionManager.createConnection(); 
 		
