@@ -1,5 +1,5 @@
 <jsp:include page="template/header.jsp" />
-<%@page import="keyprest.user_model.*"%>
+<%@page import="keyprest.user.*"%>
 
  <%
  	//Controlla che l'utente non sia giá loggato, e nel caso manda un redirect. 

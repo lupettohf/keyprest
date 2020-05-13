@@ -1,4 +1,4 @@
-package keyprest.user_model;
+package keyprest.user;
 
 import java.io.IOException;
 import java.sql.SQLException;

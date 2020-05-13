@@ -1,4 +1,4 @@
-package keyprest.user_model;
+package keyprest.user;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import keyprest.database.connectionManager;
 import keyprest.utils.Globals;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +20,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 @WebServlet(name = "UserProfile_handler", urlPatterns = {"/user"})
 public class UserProfile_handler extends HttpServlet{
 	
-	public void init()
-	{
-		connectionManager.createConnection();
+	public void init(ServletConfig config) throws ServletException {
+		try {
+			connectionManager.createConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,7 +65,7 @@ public class UserProfile_handler extends HttpServlet{
 		if(!(Password.isEmpty() || Password_confim.isEmpty() || Old_password.isEmpty()) && Password.equals(Password_confim))
 		{
 			try {
-				if(changePassword(Session_username, Old_password, Password)) {
+				if(User_utils.changePassword(Session_username, Old_password, Password)) {
 					// Restituisce il messaggio di successo
 					session.setAttribute("success", "Password impostata.");				
 				} else {
@@ -73,63 +78,33 @@ public class UserProfile_handler extends HttpServlet{
 			req.include(request, response);
 		}
 		
-	}
-	
-	private boolean changePassword(String Username, String Old_password, String New_password) throws SQLException
-	{
-		String QUERY = "UPDATE users " + 
-				"SET `password` = ? " + 
-				"WHERE EXISTS(select 1 where username = ?) AND password = ?";
+		if(!Realname.isEmpty())
+		{
+			try {
+				if(User_utils.setRealName(Session_username, Realname)) 
+				{
+					session.setAttribute("success", "Nome impostato");			
+				} else {
+					session.setAttribute("error", "Impossibile cambiare il nome.");	
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		if(Old_password.isEmpty() || New_password.isEmpty()) { return false; }
+		if(!Billing_address.isEmpty())
+		{
+			try {
+				if(User_utils.setBillingAddress(Session_username, Realname)) 
+				{
+					session.setAttribute("success", "Indirizzo di fatturazione impostato");			
+				} else {
+					session.setAttribute("error", "Impossibile cambiare l'indirizzo di fatturazione.");	
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		String HashedPassword = DigestUtils.sha256Hex(New_password + Globals.SALT); 
-		String HashedPassword_old = DigestUtils.sha256Hex(Old_password + Globals.SALT); 
-		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
-		
-		preparedStatement.setString(1, HashedPassword);
-		preparedStatement.setString(2, Username);
-		preparedStatement.setString(3, HashedPassword_old);
-		
-		if(preparedStatement.executeUpdate() == 1) {return true;}
-		
-		return false;
-	}
-	
-	private boolean setBillingAddress(String Username, String BillingAddress) throws SQLException
-	{
-		String QUERY = "UPDATE users" + 
-				"SET `b_address` = ?" + 
-				"WHERE EXISTS(select 1 from users where username = ?)";
-		
-		if(BillingAddress.isEmpty()) { return false; }
-		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
-		
-		preparedStatement.setString(1, BillingAddress);
-		preparedStatement.setString(2, Username);
-		
-		if(preparedStatement.executeUpdate() == 1) {return true;}
-		
-		return false;
-	}
-	
-	private boolean setRealName(String Username, String RealName) throws SQLException
-	{
-		String QUERY = "UPDATE users" + 
-				"SET `realname` = ?" + 
-				"WHERE EXISTS(select 1 from users where username = ?)";
-		
-		if(RealName.isEmpty()) { return false; }
-		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
-		
-		preparedStatement.setString(1, RealName);
-		preparedStatement.setString(2, Username);
-		
-		if(preparedStatement.executeUpdate() == 1) {return true;}
-		
-		return false;
 	}
 }

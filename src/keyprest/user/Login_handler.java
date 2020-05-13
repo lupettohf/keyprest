@@ -1,4 +1,4 @@
-package keyprest.user_model;
+package keyprest.user;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.servlet.SessionCookieConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,15 @@ public class Login_handler extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public void init(ServletConfig config) throws ServletException {
+		try {
+			connectionManager.createConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// Mostra la pagina di login nel caso vine fatto accesso diretto alla servelet. 
@@ -38,12 +48,13 @@ public class Login_handler extends HttpServlet {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("user.jsp");;
+		RequestDispatcher req = request.getRequestDispatcher("user.jsp");
 		
 		try {
-			if(doLogin(Username, Password)) { 
-				session.setAttribute("username", Username); 
-				
+			User user = User_utils.doLogin(Username, Password);
+			if(user.getUsername().contentEquals(Username)) { 
+				session.setAttribute("username", user.getUsername()); 
+				session.setAttribute("UserData", user);
 			} else {
 				// Reindirizza al login nel caso i dati sono errati
 				req = request.getRequestDispatcher("login.jsp");
@@ -56,33 +67,6 @@ public class Login_handler extends HttpServlet {
 			e.printStackTrace();
 		}
 		req.include(request, response);
-	}
-	
-	public boolean doLogin(String Username, String Password) throws SQLException
-	{
-		String QUERY = "SELECT * FROM users" + 
-				"         WHERE EXISTS(select 1 from users where username = ? OR mailaddr = ? )" + 
-				"               AND password = ?";
-		
-		if(Username.isEmpty() || Password.isEmpty()) { return false; }
-		
-		String HashedPassword = DigestUtils.sha256Hex(Password + Globals.SALT); 
-		
-		connectionManager.createConnection();
-		
-		if(connectionManager.databaseConnection.isClosed()) { connectionManager.createConnection(); }
-		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
-		
-		preparedStatement.setString(1, Username);
-		preparedStatement.setString(2, Username);
-		preparedStatement.setString(3, HashedPassword);
-		
-		ResultSet rs = preparedStatement.executeQuery();
-		
-		//Se ci sono risultati nella query, il login é corretto. 
-		if(rs.next()) { return true; } else { return false; }
-		
 	}
 	
 }

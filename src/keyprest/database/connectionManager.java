@@ -7,9 +7,10 @@ import java.sql.SQLException;
 public class connectionManager {
 	public static Connection databaseConnection;
 	
-	public static void createConnection(){
+	public static void createConnection() throws ClassNotFoundException{
 		try {
-			databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/my_keys?useSSL=false", "andrea", "xx");
+			Class.forName("com.mysql.jdbc.Driver"); 
+			databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/keyprest?useSSL=false", "keyprest", "PorcodioPorcamadonna");
 		} catch (SQLException e) {
 			// TODO: Autogenerato, da cambiare
 			e.printStackTrace();

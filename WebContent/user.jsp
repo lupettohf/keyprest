@@ -1,5 +1,5 @@
 <jsp:include page="template/header.jsp" />
-<%@page import="keyprest.user_model.*"%>
+<%@page import="keyprest.user.*"%>
 
 <jsp:include page="template/error.jsp" />
 
