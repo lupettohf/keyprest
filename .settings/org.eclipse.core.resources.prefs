@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding//WebContent/products.jsp=UTF-8
+encoding//WebContent/template/pages/edit_product.jsp=UTF-8
+encoding//WebContent/template/pages/housekeeping.jsp=UTF-8
+encoding//WebContent/template/pages/user.jsp=UTF-8
+encoding//WebContent/template/skeletons/products.jsp=UTF-8

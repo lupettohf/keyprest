@@ -40,7 +40,7 @@ public class Login_handler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// Mostra la pagina di login nel caso vine fatto accesso diretto alla servelet. 
-		RequestDispatcher req = request.getRequestDispatcher("login.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/template/pages/login.jsp");
 		req.include(request, response);
 	}
 	
@@ -48,16 +48,20 @@ public class Login_handler extends HttpServlet {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("user.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/template/pages/login.jsp");
 		
 		try {
-			User user = User_utils.doLogin(Username, Password);
-			if(user.getUsername().contentEquals(Username)) { 
+			String SessionKey = User_utils.doLogin(Username, Password);
+			if(SessionKey != null && !SessionKey.isEmpty()) { 
+				User user = User_utils.getUser(SessionKey);
 				session.setAttribute("username", user.getUsername()); 
-				session.setAttribute("UserData", user);
+				session.setAttribute("sessionkey", SessionKey);
+				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }
+				
+				response.sendRedirect("user");
 			} else {
 				// Reindirizza al login nel caso i dati sono errati
-				req = request.getRequestDispatcher("login.jsp");
+				response.sendRedirect("login");
 				
 				// Setta il testo dell'errore nella sessione
 				session.setAttribute("error", "Login Failed");

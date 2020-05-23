@@ -16,5 +16,9 @@
 	<classpathentry exported="true" kind="lib" path="/Users/andrea/eclipse-workspace/keyprest/jars/commons-codec-1.14-javadoc.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/andrea/eclipse-workspace/keyprest/jars/commons-codec-1.14.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/andrea/eclipse-workspace/keyprest/jars/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="/Users/andrea/eclipse-workspace/keyprest/jars/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/Users/andrea/eclipse-workspace/keyprest/jars/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/andrea/Downloads/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/Users/andrea/Downloads/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

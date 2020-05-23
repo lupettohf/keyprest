@@ -38,12 +38,12 @@ public class Product_handler extends HttpServlet {
 	{
 		ArrayList<Product> products = new ArrayList<Product>();
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("products.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/template/skeletons/products.jsp");
 		int start_id = 1;
 		int end_id = 10;
 		
-	//	if(!request.getParameter("startid").isEmpty()) { start_id = Integer.parseInt(request.getParameter("startid")); };
-	//	if(!request.getParameter("endid").isEmpty()){ end_id = Integer.parseInt(request.getParameter("endid")); };
+		//if(!request.getParameter("startid").isEmpty()) { start_id = Integer.parseInt(request.getParameter("startid")); };
+		//if(!request.getParameter("endid").isEmpty()){ end_id = Integer.parseInt(request.getParameter("endid")); };
 		
 		try {
 			products = Product_utils.retriveProducts(start_id, end_id);
@@ -56,10 +56,4 @@ public class Product_handler extends HttpServlet {
 		}
 		
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-
-	}
-
 }

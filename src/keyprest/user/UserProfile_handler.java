@@ -30,13 +30,22 @@ public class UserProfile_handler extends HttpServlet{
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
-		if(session.getAttribute("username") == null)
+		String Username = (String) session.getAttribute("username");
+		String SessionKey = (String) session.getAttribute("sessionkey");
+		if(Username == null)
 		{
-			req = request.getRequestDispatcher("login.jsp");
+			req = request.getRequestDispatcher("/template/pages/login.jsp");
 		} else {
-			req = request.getRequestDispatcher("user.jsp");
+			req = request.getRequestDispatcher("/template/pages/user.jsp");
+			
+			String gavatarHash;
+			try {
+				gavatarHash = gavatarMD5(User_utils.getUser(SessionKey).getMailAddress());
+				session.setAttribute("gavatar", gavatarHash);
+			} catch (SQLException e) {e.printStackTrace();}
 		}
 		
 		req.include(request, response);
@@ -48,24 +57,25 @@ public class UserProfile_handler extends HttpServlet{
 		String Old_password = request.getParameter("old_password");
 		String EMail = request.getParameter("e-mail");
 		String Realname = request.getParameter("realname");
-		String Billing_address = request.getParameter("billing");
+		String Billing_address = request.getParameter("address");
 		
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("user.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/template/pages/user.jsp");
 		
 		//Verifica che l'utente sia loggato.
 		if(session.getAttribute("username") == null) { 
-			req = request.getRequestDispatcher("login.jsp");
+			req = request.getRequestDispatcher("/template/pages/login.jsp");
 			req.include(request, response);
 		}
 		
 		String Session_username = (String) session.getAttribute("username");
+		String Session_Key = (String) session.getAttribute("sessionkey");
 		
 		// Se l'utente popola i campi di cambio password la richiesta viene passata. 
 		if(!(Password.isEmpty() || Password_confim.isEmpty() || Old_password.isEmpty()) && Password.equals(Password_confim))
 		{
 			try {
-				if(User_utils.changePassword(Session_username, Old_password, Password)) {
+				if(User_utils.changePassword(Session_Key, Old_password, Password)) {
 					// Restituisce il messaggio di successo
 					session.setAttribute("success", "Password impostata.");				
 				} else {
@@ -75,13 +85,12 @@ public class UserProfile_handler extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			req.include(request, response);
 		}
 		
 		if(!Realname.isEmpty())
 		{
 			try {
-				if(User_utils.setRealName(Session_username, Realname)) 
+				if(User_utils.setRealName(Session_Key, Realname)) 
 				{
 					session.setAttribute("success", "Nome impostato");			
 				} else {
@@ -95,7 +104,7 @@ public class UserProfile_handler extends HttpServlet{
 		if(!Billing_address.isEmpty())
 		{
 			try {
-				if(User_utils.setBillingAddress(Session_username, Realname)) 
+				if(User_utils.setBillingAddress(Session_Key, Billing_address)) 
 				{
 					session.setAttribute("success", "Indirizzo di fatturazione impostato");			
 				} else {
@@ -105,6 +114,11 @@ public class UserProfile_handler extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		
+		req.include(request, response);
+	}
+	
+	private static String gavatarMD5(String Email)
+	{
+		return DigestUtils.md5Hex(Email); 
 	}
 }

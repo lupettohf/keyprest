@@ -89,7 +89,7 @@ public class Product {
 		this.Region = Region;
 	}
 	
-	public boolean IsDlC()
+	public boolean IsDLC()
 	{
 		return this.Is_DLC;
 	}

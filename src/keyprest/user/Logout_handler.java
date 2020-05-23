@@ -24,9 +24,9 @@ public class Logout_handler extends HttpServlet{
 		
 		HttpSession session = request.getSession();  
 		
-		if(session.getAttribute("username") != null ){ 
+		if(session.getAttribute("sessionkey") != null ){ 
 			session.invalidate(); 
-			RequestDispatcher req = request.getRequestDispatcher("loggedout.jsp");
+			RequestDispatcher req = request.getRequestDispatcher("/template/pages/loggedout.jsp");
 			req.include(request, response);
 		} 
           

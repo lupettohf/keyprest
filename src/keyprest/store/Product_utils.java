@@ -21,7 +21,7 @@ public class Product_utils {
 		
 		preparedStatement.setInt(1, product_ID);
 		
-		ResultSet r = preparedStatement.executeQuery(QUERY);
+		ResultSet r = preparedStatement.executeQuery();
 		
 		/* Controlla che vi sia un risultato, altrimenti ritorna nullo. */ 
 		if(!r.next()) { return null; }
@@ -44,7 +44,7 @@ public class Product_utils {
 	public static boolean addNewProduct(Product product) throws SQLException
 	{
 		String QUERY = "INSERT INTO products" +
-				"(name, service, description, price, discount, region, id_dlc) "
+				"(name, service, description, price, discount, region, is_dlc) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
@@ -57,7 +57,7 @@ public class Product_utils {
 		preparedStatement.setFloat(4, product.getPrice());
 		preparedStatement.setInt(5, product.getDiscount());
 		preparedStatement.setString(6, product.getRegion());
-		preparedStatement.setBoolean(7, product.IsDlC());
+		preparedStatement.setBoolean(7, product.IsDLC());
 	
 		if(preparedStatement.executeUpdate() > 0) { return true; } else { return false; } 
 	}
@@ -67,8 +67,9 @@ public class Product_utils {
 	 */
 	public static boolean updateProduct(int product_ID, Product newProduct) throws SQLException 
 	{
+		//TODO: non funziona, errore con i parameti
 		String QUERY = "UPDATE products" 
-				+ "SET name + ?, service = ?, description = ?, price = ?, discount = ?, region = ?, is_dlc = ?"
+				+ "SET name = '?', service = '?', description = '?', price = '?',  discount = '?', region = '?', is_dlc = '?'"
 				+ "WHERE product_id = ?";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
@@ -79,12 +80,30 @@ public class Product_utils {
 		preparedStatement.setFloat(4, newProduct.getPrice());
 		preparedStatement.setInt(5, newProduct.getDiscount());
 		preparedStatement.setString(6, newProduct.getRegion());
-		preparedStatement.setBoolean(7, newProduct.IsDlC());
+		preparedStatement.setBoolean(7, newProduct.IsDLC());
 		preparedStatement.setInt(8, product_ID);
 		
 		if(preparedStatement.executeUpdate() > 0) { return true; } else { return false; } 
 	}
 
+	/*
+	 * Aggiunge una chiave di attivazione al prodotto specificato.
+	 */
+	public static boolean importKey(int product_ID, String Key) throws SQLException
+	{
+		
+		String QUERY = "INSERT INTO `keys` (`product_id`, `key`, `sold`) " +
+				"VALUES\n" + 
+				"	(?, ?, 0)";
+		
+		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		
+		preparedStatement.setInt(1, product_ID);
+		preparedStatement.setString(2, Key);
+		
+		if(preparedStatement.executeUpdate() > 0) { return true; } else { return false; } 
+	}
+	
 	/* Crea una lista di prodotti a partire dall'id del primo e scorrendo fino a EndID.
 	 *
 	 */
