@@ -51,25 +51,33 @@ public class ImageImporter_handler extends HttpServlet {
 			HttpSession session = request.getSession();
 			String SessionKey = (String) session.getAttribute("sessionkey");
 			String ProductID = request.getParameter("productid");
-			
-		    String appPath = request.getServletContext().getRealPath("");
-		    String savePath = appPath + File.separator + UPLOAD_DIRECTORY;
-		         
-			File game_image_dir = new File(savePath);
-			if (!game_image_dir.exists()) {
-				game_image_dir.mkdir();
+					
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+
+			String applicationPath = request.getServletContext().getRealPath("");
+
+			String uploadFilePath = applicationPath + File.separator + UPLOAD_DIRECTORY;
+
+			File uploadFolder = new File(uploadFilePath);
+			if (!uploadFolder.exists()) {
+				uploadFolder.mkdirs();
 			}
 			
-			 System.out.println("Game_TITLES upload dir is: " + game_image_dir.getAbsolutePath());
-
+			PrintWriter writer = response.getWriter();
 			for (Part part : request.getParts()) {
-				String fileName = ProductID + ".png";
-				if (fileName != null && !fileName.equals("")) {
-					part.write(savePath + File.separator + fileName);
+				if (part != null && part.getSize() > 0) {
+					String fileName = ProductID + ".png";
+					String contentType = part.getContentType();
+
+					part.write(uploadFilePath + File.separator + fileName);
+					
+					writer.append("File successfully uploaded to " 
+							+ uploadFolder.getAbsolutePath() 
+							+ File.separator
+							+ fileName
+							+ "<br>\r\n");
 				}
 			}
-
-			RequestDispatcher view = request.getRequestDispatcher("/housekeeping");
-			view.forward(request, response);
 	    }
 }

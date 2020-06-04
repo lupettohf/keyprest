@@ -37,6 +37,12 @@ public class Housekeeping_handler extends HttpServlet{
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
 		
+		String StartID = request.getParameter("sid");
+		String EndID = request.getParameter("eid");
+		
+		int _StartID = 0;
+		int _EndID = 10;
+		
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		if(SessionKey == null)
 		{
@@ -46,12 +52,20 @@ public class Housekeeping_handler extends HttpServlet{
 				if(User_utils.isAdmin(SessionKey)) {
 					req = request.getRequestDispatcher("/template/pages/housekeeping.jsp");
 					
-					int start_id = 1;
-					int end_id = 10;
+					if(StartID != null || EndID != null) {
+						try {
+							_StartID = Integer.parseInt(StartID);
+							_EndID = Integer.parseInt(EndID);
+						} catch(NumberFormatException e) {}
+						
+					}
 					
 					// Manda la lista dei prodotti
 						
-					session.setAttribute("products", Product_utils.retriveProducts(start_id, end_id));
+					session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
+				} else {
+					req = request.getRequestDispatcher("/template/pages/user.jsp");
+					response.sendRedirect("user");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -2,9 +2,9 @@
 <%@page import="keyprest.store.*"%>
 <%@page import="keyprest.user.*"%>
 <%@page import="java.util.ArrayList" %>
-<jsp:include page="../skeletons/header.jsp" />
-<% ArrayList<Product> products = (ArrayList<Product>) Product_utils.retriveProducts(1, 1); %>
+<% ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");  %>
 
+<% if(products != null){ %>
 <div class="container">
   <div class="row">
 <c:forEach var="product" items="${products}">
@@ -12,14 +12,14 @@
       <div class="product-grid">
         <div class="product-image">
           <a href="#" class="image">
-          	<img class="pic-1" src="static/images/products/${product.getID()}/.png">
+          <!--<img class="pic-1" src="https://via.placeholder.com/300.png">-->
+          <img class="pic-1" src="static/images/products/${product.getID()}.png">
           </a>
           <form method="post" action="cart">
   			<input type="hidden" name="action" value="add_product">
   			<input type="hidden" name="product_id" value="${product.getID()}">
   			<button type="submit" class="add-to-cart" name="submit_param" value="submit">Add To Cart</button>
 		  </form>
-         <!-- <a href="">ADD TO CART</a> -->
         </div>
         <div class="product-content">
           <span class="product-name"><c:out value="${product.getName()}"/></span>
@@ -30,18 +30,10 @@
           </ul>
           <span class="region"><c:out value="${product.getRegion()}"/></span>
           <div class="price"><c:out value="${product.getPrice()}"/> $</div>
-          <ul class="rating">
-            <li class="fas fa-star"></li>
-            <li class="fas fa-star"></li>
-            <li class="fas fa-star"></li>
-            <li class="fas fa-star"></li>
-            <li class="fas fa-star disable"></li>
-          </ul>
         </div>
       </div>
     </div>
 </c:forEach>  
   </div>
 </div>
-
-<jsp:include page="../skeletons/footer.jsp" />
+<% } %>

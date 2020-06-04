@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import keyprest.user.User_utils;
 
-@WebServlet(name = "Cart_handler", urlPatterns = {"/cart"})
-public class Cart_handler extends HttpServlet {
-	
+
+@WebServlet(name = "Checkout_handler", urlPatterns = {"/checkout"})
+public class Checkout_handler {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		

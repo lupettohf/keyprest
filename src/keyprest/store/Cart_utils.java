@@ -11,38 +11,44 @@ import keyprest.utils.Validators;
 
 public class Cart_utils {
 	
-	public static ArrayList<CartItem> getCartItems(String session_key) throws SQLException
+	public static ArrayList<CartItem> getCartItems(String session_key) 
 	{
 		String QUERY = "SELECT * FROM cart WHERE user_id = ?";
 		
 		int _id = 0;
 		
-		if(User_utils.getUser(session_key) == null) {
-			return null;
-		}else{
-			_id = User_utils.getUser(session_key).getID();
-		}
-		
-		if(_id > 0) {
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
-		
-			preparedStatement.setInt(1, _id);
-		
-			ResultSet rs = preparedStatement.executeQuery();
-		
-			ArrayList<CartItem> _cart = new ArrayList<CartItem>();
-		
-			while(rs.next())
-			{
-				_cart.add(
-						new CartItem(
-								rs.getInt("product_id"), 
-								rs.getInt("user_id"),
-								rs.getInt("id")
-						));
+		try {
+			if(User_utils.getUser(session_key) == null) {
+				return null;
+			}else{
+				_id = User_utils.getUser(session_key).getID();
 			}
 		
-			return _cart;
+			if(_id > 0) {
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		
+				preparedStatement.setInt(1, _id);
+		
+				ResultSet rs = preparedStatement.executeQuery();
+		
+				ArrayList<CartItem> _cart = new ArrayList<CartItem>();
+		
+				while(rs.next())
+				{
+					_cart.add(
+							new CartItem(
+									rs.getInt("product_id"), 
+									rs.getInt("user_id"),
+									rs.getInt("id")
+							));
+				}
+		
+				return _cart;
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return null;

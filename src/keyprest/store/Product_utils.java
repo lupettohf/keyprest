@@ -109,22 +109,17 @@ public class Product_utils {
 	 */
 	public static ArrayList<Product> retriveProducts(int StartID, int EndID) throws SQLException
 	{
+		
 		ArrayList<Product> products = new ArrayList<Product>();
 		
-		String QUERY = "SELECT * FROM products";
+		String QUERY = "SELECT * FROM products WHERE product_id BETWEEN ? AND ?";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-		//preparedStatement.setInt(1, StartID);
-		//preparedStatement.setInt(2, EndID);
+		preparedStatement.setInt(1, StartID);
+		preparedStatement.setInt(2, EndID);
 		
 		ResultSet r = preparedStatement.executeQuery();
-		
-		/*Scorriamo i/il rislutato/i trovati e inseriamoli nell'array 
-		 * Se non vi sono risultati ritorna nullo. 
-		 * */
-		
-		if(!r.next()) { return null; }
 		
 		while(r.next())
 		{

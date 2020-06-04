@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -32,47 +34,50 @@ public class KeyImporter_handler extends HttpServlet{
             throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		RequestDispatcher req = request.getRequestDispatcher("/template/pages/housekeeping.jsp");
+		
 		String SessionKey = (String) session.getAttribute("sessionkey");
+		String Keys = request.getParameter("keys");
+		String ProductID = request.getParameter("productid");
+		int _ProductID = 0;
+		int _Imported = 0;		
 		
-		int _imported = 0;
-		int ProductID = 2;
+		if(ProductID != null)
+		{
+			try {
+				_ProductID = Integer.parseInt(ProductID);
+			} catch (NumberFormatException e) {
+				session.setAttribute("error", "L'id prodotto é errato.");
+			}
+		}
 		
-		
-		if(ProductID <=0) { request.setAttribute("error", "L'id prodotto é errato."); }
+		if(_ProductID <=0) { session.setAttribute("error", "L'id prodotto é errato."); }
 		
 		try {
 			if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey)))
 			{
-			    if(ServletFileUpload.isMultipartContent(request)){
-			        try {
-			            List<FileItem> multiparts = new ServletFileUpload(
-			                                     new DiskFileItemFactory()).parseRequest(request);
-			          
-			            for(FileItem item : multiparts){
-			                if(!item.isFormField()){
-			                    _imported = importKeys(item, ProductID);
-			                }
-			            }
-			       
-			           //File uploaded successfully
-			           request.setAttribute("message", "Imported " + _imported + "keys.");
-			        } catch (Exception ex) {
-			           request.setAttribute("message", "File Upload Failed due to " + ex);
-			        }          
-			     
-			    }else{
-			        request.setAttribute("message",
-			                             "Sorry this Servlet only handles file upload request");
-			    }
+				if(Keys.isEmpty()) {
+					session.setAttribute("error", "Non vi sono pervenute chiavi.");
+				} else {
+					_Imported = importKeys(Keys, _ProductID);
+					
+					if(_Imported > 0) { 
+						session.setAttribute("success", "Sono state importate " + _Imported + " chiavi.");
+					} else {
+						session.setAttribute("error", "Si é verificato un errore nell'importazione.");
+					}
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		req.include(request, response);
     }
-	
-	private static int importKeys(FileItem file, int product_id)
+    
+	private static int importKeys(String Keys, int product_id)
 	{
-		Scanner scanner = new Scanner(file.getString());
+		Scanner scanner = new Scanner(Keys);
 		int _imported = 0;
 		
 		while (scanner.hasNextLine()) {

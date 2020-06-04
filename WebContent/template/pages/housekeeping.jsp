@@ -1,16 +1,15 @@
-<jsp:include page="../skeletons/header.jsp" />
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="keyprest.user.*"%>
-
-<jsp:include page="../skeletons/error.jsp" />
+<jsp:include page="../skeletons/header.jsp" />
 <h1>Housekeeping 🧹</h1>
 <h4>Bentornato leader supremo <% out.println(session.getAttribute("username")); %></h4>
 <br>
 <jsp:include page="../skeletons/success.jsp" />
 <jsp:include page="../skeletons/error.jsp" />
-
 <hr>
 <h3>Prodotti disponibili</h3>
 <jsp:include page="../skeletons/products.jsp" />
+<hr>
 <br>
 <hr>
 <h3>Aggiungi prodotto</h3>
@@ -50,20 +49,23 @@
 <br>
 <hr>
 <h3>Upload Keys To Product<h3>
-<form action="importkey" method="post" enctype="multipart/form-data">
-	<input type="file" name="file" />
+<form action="importkey" method="post">
+	<select name="productid">
+	<c:forEach var="product" items="${products}">
+		<option value="${product.getID()}"><c:out value="${product.getName()}"/></option>
+	</c:forEach> 
+	</select>
+	<textarea name="keys"/></textarea>
 	<input type="submit" value="upload" />
-	<input type="text" name="productid"/>
 </form>
 <hr>
 <h3>Upload Products Images<h3>
 <form action="uploadimage" enctype="multipart/form-data" method="post">
-	Id:
+	Product:
 	<select name="productid">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
+<c:forEach var="product" items="${products}">
+		<option value="${product.getID()}"><c:out value="${product.getName()}"/></option>
+</c:forEach> 
 	</select>
 	<br>
 	<input class="file" type="file" name="talkPhoto" value="" maxlength="255">	
