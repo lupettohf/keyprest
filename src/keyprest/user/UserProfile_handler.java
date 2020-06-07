@@ -40,12 +40,12 @@ public class UserProfile_handler extends HttpServlet{
 			req = request.getRequestDispatcher("/template/pages/login.jsp");
 		} else {
 			req = request.getRequestDispatcher("/template/pages/user.jsp");
-			
+			/*
 			String gavatarHash;
 			try {
 				gavatarHash = gavatarMD5(User_utils.getUser(SessionKey).getMailAddress());
 				session.setAttribute("gavatar", gavatarHash);
-			} catch (SQLException e) {e.printStackTrace();}
+			} catch (SQLException e) {e.printStackTrace();}*/
 		}
 		
 		req.include(request, response);

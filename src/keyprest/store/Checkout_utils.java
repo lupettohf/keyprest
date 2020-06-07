@@ -15,6 +15,7 @@ public class Checkout_utils {
 		
 		for(CartItem item: cart)
 		{
+			System.out.println("Item Id:" + item.getItemID() + " User ID: " + item.getUserID());
 			if(!assignProduct(item.getItemID(), item.getUserID()))
 			{
 				return false;
@@ -25,9 +26,7 @@ public class Checkout_utils {
 	
 	private static boolean assignProduct(int product_id, int user_id)
 	{
-		String QUERY = "INSERT INTO orders"
-				+ "(user, product_id, final_price, key_id)"
-				+ "VALUES ?, ?, ?, ?"; 
+		String QUERY = "INSERT INTO orders (user, product_id, final_price, key_id) VALUES (?, ?, ?, ?)"; 
 		
 		float _finalprice = 0;
 		int _discount = 0;
@@ -65,7 +64,7 @@ public class Checkout_utils {
 		
 			if(preparedStatement.executeUpdate() == 1) {return true;} else {return false;} 
 		
-		} catch (SQLException e) { return false;}
+		} catch (SQLException e) { System.out.println(e.toString()); return false;}
 	}
 	
 	private static int retriveKey(int product_id) throws SQLException

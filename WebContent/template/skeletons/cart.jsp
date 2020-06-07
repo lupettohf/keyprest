@@ -33,7 +33,10 @@
     </div>
 </c:forEach>  
 
-  <h6>Subtotal: <c:out value="${subtotal}"/>$</h6>
+  <h5>Subtotal: <c:out value="${subtotal}"/>$</h5>
+  <form method="post" action="checkout">
+  	<button type="submit" class="add-to-cart" name="submit_param" value="submit">Checkout</button>
+  </form>
   </div>
 
 <jsp:include page="../skeletons/footer.jsp" />
