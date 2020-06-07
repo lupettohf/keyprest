@@ -15,7 +15,7 @@
           </a>
           <form method="post" action="cart">
   			<input type="hidden" name="action" value="delete_product">
-  			<input type="hidden" name="product_id" value="${item.getItemID()}">
+  			<input type="hidden" name="cart_id" value="${item.getCartID()}">
   			<button type="submit" class="add-to-cart" name="submit_param" value="submit">Delete</button>
 		  </form>
         </div>

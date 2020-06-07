@@ -33,7 +33,6 @@ public class Checkout_utils {
 		int _keyid = 0;
 		
 		if(product_id <= 0 || user_id <= 0) {return false;} 
-		
 		Product _p;
 		try {
 			_p = Product_utils.productByID(product_id);
@@ -48,20 +47,22 @@ public class Checkout_utils {
 					_finalprice = _finalprice - (_finalprice * _discount / 100);
 				}
 			}else { return false;}
-		
+			System.out.println("Product is " + _p.getName() + " price " + _p.getPrice());
 			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
-			
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, product_id);
 			preparedStatement.setFloat(3, _finalprice);
 		
 			_keyid = retriveKey(product_id);
-		
+			
+			System.out.println("Key id is " + _keyid);
+			
 			if(_keyid == 0) { return false; } 
-		
+
 			preparedStatement.setInt(4, _keyid);
-		
+			
+			
 			if(preparedStatement.executeUpdate() == 1) {return true;} else {return false;} 
 		
 		} catch (SQLException e) { System.out.println(e.toString()); return false;}
@@ -73,7 +74,7 @@ public class Checkout_utils {
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-		preparedStatement.setInt(0, product_id);
+		preparedStatement.setInt(1, product_id);
 		
 		ResultSet rs = preparedStatement.executeQuery();
 		
@@ -81,6 +82,7 @@ public class Checkout_utils {
 		{
 			if(!rs.getString("key").isEmpty())
 			{
+					System.out.println("Key is " + rs.getString("key"));
 					if(lockKey(rs.getInt("key_id")))
 					{
 						return rs.getInt("key_id");
@@ -93,7 +95,7 @@ public class Checkout_utils {
 	private static boolean lockKey(int key_id) throws SQLException
 	{
 		
-		String QUERY = "UPDATE key SET sold = '1' WHERE product_id = ?";
+		String QUERY = "UPDATE `keys` SET sold = '1' WHERE key_id = ?";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		

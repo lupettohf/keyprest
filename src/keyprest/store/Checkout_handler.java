@@ -32,6 +32,9 @@ public class Checkout_handler extends HttpServlet{
 			if(SessionKey != null || User_utils.getUser(SessionKey) != null) {
 			
 				cart_items = Cart_utils.getCartItems(SessionKey);
+				
+				if(cart_items == null) { response.sendRedirect("login"); } 
+				
 				out.println("<h6>getting cart items...</h6>"); 
 				if(!cart_items.isEmpty())
 				{
@@ -40,6 +43,7 @@ public class Checkout_handler extends HttpServlet{
 						for(CartItem item: cart_items)
 						{
 							Cart_utils.deleteFromCart(SessionKey, item.getCartID());
+							out.println("<h6>added " + item.productName() + "</h6>"); 
 						}
 						
 						//TODO: ACQUISTO EFFETTUATO

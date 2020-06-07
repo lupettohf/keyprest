@@ -80,29 +80,36 @@ public class Cart_utils {
 		return false;
 	}
 	
-	public static boolean deleteFromCart(String session_key, int cart_id) throws SQLException
+	public static boolean deleteFromCart(String session_key, int cart_id)
 	{
 		String QUERY = "DELETE FROM cart WHERE user_id = ? AND id = ?";
 		
 		int _id = 0;
 		
-		if(User_utils.getUser(session_key) == null) {
-			return false;
-		}else{
-			_id = User_utils.getUser(session_key).getID();
-		}
+		try {
+			
+			if(User_utils.getUser(session_key) == null) {
+				return false;
+			}else{
+				_id = User_utils.getUser(session_key).getID();
+			}
 		
-		if(_id > 0)
-		{
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		
+			if(_id > 0)
+			{
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
-			preparedStatement.setInt(1, _id);
-			preparedStatement.setInt(2, cart_id);
+				preparedStatement.setInt(1, _id);
+			
+				preparedStatement.setInt(2, cart_id);
+				System.out.println(_id + " " + cart_id);
 
-			if(preparedStatement.executeUpdate() == 1) {return true;}	
-		}
+				if(preparedStatement.executeUpdate() == 1) {return true;}	
+			}
 
-		return false;
+			return false;
+		
+		} catch (SQLException e) {return false;}
 	}
 
 }

@@ -32,8 +32,7 @@ public class Index_handler extends HttpServlet{
 				try {
 					_StartID = Integer.parseInt(StartID);
 					_EndID = Integer.parseInt(EndID);
-				} catch(NumberFormatException e) {}
-						
+				} catch(NumberFormatException e) {}						
 			}
 					
 			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));

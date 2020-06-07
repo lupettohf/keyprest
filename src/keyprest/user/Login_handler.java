@@ -52,11 +52,16 @@ public class Login_handler extends HttpServlet {
 		
 		try {
 			String SessionKey = User_utils.doLogin(Username, Password);
-			if(SessionKey != null && !SessionKey.isEmpty()) { 
+			
+			System.out.println("User " + Username + " with sessionkey: " + SessionKey);
+			
+			if(!SessionKey.equals("false") && !SessionKey.isEmpty()) { 
 				User user = User_utils.getUser(SessionKey);
 				session.setAttribute("username", user.getUsername()); 
 				session.setAttribute("sessionkey", SessionKey);
 				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }
+				
+				System.out.println("User logged (" + user.getUsername() + ") with id: " + user.getID());
 				
 				response.sendRedirect("user");
 			} else {

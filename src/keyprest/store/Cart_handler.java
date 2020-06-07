@@ -27,27 +27,25 @@ public class Cart_handler extends HttpServlet {
 		
 		float cur_price = 0;
 
-		if(SessionKey != null) {
-		
+		try {
+			if(User_utils.getUser(SessionKey) == null) { response.sendRedirect("login"); }
+
 			cart_items = Cart_utils.getCartItems(SessionKey);
 			
 			if(!cart_items.isEmpty())
 			{
 				session.setAttribute("cart", cart_items);
-				
 				for(CartItem item : cart_items) {
 					cur_price = item.productPrice() + cur_price;
 				}
 				
 				session.setAttribute("subtotal", String.valueOf(cur_price));
+			} else {
+				//todo:cart is empty
 			}
-			
-			
-		
 			req.include(request, response);
 		
-		}else {response.sendRedirect("login");}
-		
+		} catch (SQLException | IOException e) {}
 	}
 
 	
@@ -70,7 +68,7 @@ public class Cart_handler extends HttpServlet {
 		}
 	
 		try {
-			if(!(User_utils.getUser(SessionKey) != null)) { return; }
+			if(!(User_utils.getUser(SessionKey) != null)) { response.sendRedirect("login"); }
 		
 			if(Action.contentEquals("add_product"))
 			{	

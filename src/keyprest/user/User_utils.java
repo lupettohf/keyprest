@@ -108,7 +108,7 @@ public class User_utils {
 		//Se ci sono risultati nella query, il login é corretto. 
 		if(rs.next()) { 
 			return genUserSession(Username);
-		} else { return null; }
+		} else { return "false"; }
 	}
 	
 	public static boolean changePassword(String Username, String Old_password, String New_password) throws SQLException
