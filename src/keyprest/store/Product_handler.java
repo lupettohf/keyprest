@@ -22,16 +22,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
-@WebServlet(name = "Product_handler", urlPatterns = {"/products"})
+//@WebServlet(name = "Product_handler", urlPatterns = {"/products"})
 public class Product_handler extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			connectionManager.createConnection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		connectionManager.createConnection();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

@@ -114,6 +114,8 @@ public class Product_utils {
 		
 		String QUERY = "SELECT * FROM products WHERE product_id BETWEEN ? AND ?";
 		
+		if(connectionManager.databaseConnection.isClosed()) { connectionManager.createConnection(); } 
+		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
 		preparedStatement.setInt(1, StartID);
@@ -136,6 +138,31 @@ public class Product_utils {
 		}
 		
 		return products;
+	}
+	
+	
+	/*
+	 * Conta il numero di key disponibili sul prodotto.
+	 */
+	
+	public static int countKeysStock(int product_id)
+	{
+		
+		String QUERY = "SELECT COUNT(*) AS instock FROM `keys` WHERE product_id = ? AND sold = 0";
+		
+		try {
+			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+				
+			preparedStatement.setInt(1, product_id);
+
+			ResultSet r = preparedStatement.executeQuery();
+		
+			while(r.next()){ return r.getInt("instock"); }
+		
+		} catch (SQLException e) { return 0; }
+		
+		return 0;
+		
 	}
 }
 

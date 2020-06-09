@@ -47,5 +47,7 @@
       </form>
     </div>
   </div>
+  <jsp:include page="../skeletons/product.jsp" />
+  
 <a href="logout?x=1">Logout</a>
 <jsp:include page="../skeletons/footer.jsp" />

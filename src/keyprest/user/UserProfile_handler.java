@@ -3,6 +3,7 @@ package keyprest.user;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import keyprest.database.connectionManager;
 import keyprest.utils.Globals;
@@ -21,12 +22,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class UserProfile_handler extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			connectionManager.createConnection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		connectionManager.createConnection();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +42,22 @@ public class UserProfile_handler extends HttpServlet{
 				gavatarHash = gavatarMD5(User_utils.getUser(SessionKey).getMailAddress());
 				session.setAttribute("gavatar", gavatarHash);
 			} catch (SQLException e) {e.printStackTrace();}*/
+			ArrayList<Orders> orders = new ArrayList<Orders>();
+			
+			try {
+				orders = Orders_utils.fetchUserOrders(User_utils.getUser(SessionKey).getID());
+			
+				if(!orders.isEmpty() || orders != null)
+				{
+					session.setAttribute("orders", orders);
+				} else {
+					//todo: orders empty
+				}
+			} catch (SQLException | NullPointerException e) {
+				// TODO RIMUOVERE TRY
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		req.include(request, response);

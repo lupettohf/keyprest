@@ -29,12 +29,7 @@ public class Login_handler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			connectionManager.createConnection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		connectionManager.createConnection();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

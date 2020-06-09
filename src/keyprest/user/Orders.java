@@ -1,5 +1,9 @@
 package keyprest.user;
 
+import java.sql.SQLException;
+
+import keyprest.store.Product_utils;
+
 public class Orders {
 	
 	private int order_id;
@@ -40,6 +44,23 @@ public class Orders {
 	public int getKeyID()
 	{
 		return this.key_id;
+	}
+	
+	public String getProductName()
+	{
+		try {
+			return Product_utils.productByID(product_id).getName();
+		} catch (SQLException e) {
+			// TODO RIMUOVERE TRY 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "false";
+	}
+	
+	public String getKey()
+	{
+		return Orders_utils.getKey(key_id);
 	}
 	
 }

@@ -23,12 +23,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class Register_handler extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
-		try {
 			connectionManager.createConnection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

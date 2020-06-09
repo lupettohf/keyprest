@@ -23,12 +23,7 @@ import keyprest.user.User_utils;
 public class Housekeeping_handler extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			connectionManager.createConnection();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		connectionManager.createConnection();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{}

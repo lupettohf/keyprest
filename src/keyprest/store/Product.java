@@ -98,5 +98,21 @@ public class Product {
 	{
 		this.Is_DLC = isDLC;
 	}
+	
+	public int stockQuantity()
+	{
+		return Product_utils.countKeysStock(ID);
+	}
+	
+	public float getDiscountPrice()
+	{
+		if(this.DiscountPercentage > 0)
+		{
+			float finalprice = this.Price;
+			finalprice = finalprice - (finalprice * this.DiscountPercentage / 100);
+			
+			return finalprice;
+		} else { return 0; } 
+	}
 }
 

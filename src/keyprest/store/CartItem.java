@@ -49,6 +49,18 @@ public class CartItem {
 		}
 		return "";
 	}
+	
+	//TODO Sti try vanno levati asap
+	
+	public String productDescription()
+	{
+		try {
+			return Product_utils.productByID(this.product_id).getDescription();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 
 	public float productPrice()
 	{

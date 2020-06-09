@@ -26,26 +26,26 @@ public class Cart_handler extends HttpServlet {
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		float cur_price = 0;
-
 		try {
-			if(User_utils.getUser(SessionKey) == null) { response.sendRedirect("login"); }
+			if(User_utils.getUser(SessionKey) != null) { 
 
-			cart_items = Cart_utils.getCartItems(SessionKey);
+				cart_items = Cart_utils.getCartItems(SessionKey);
 			
-			if(!cart_items.isEmpty())
-			{
-				session.setAttribute("cart", cart_items);
-				for(CartItem item : cart_items) {
-					cur_price = item.productPrice() + cur_price;
-				}
+				if(!cart_items.isEmpty())
+				{
+					session.setAttribute("cart", cart_items);
+					for(CartItem item : cart_items) {
+						cur_price = item.productPrice() + cur_price;
+					}
 				
 				session.setAttribute("subtotal", String.valueOf(cur_price));
-			} else {
-				//todo:cart is empty
-			}
+				} else {
+					//todo:cart is empty
+				}
+			} else { response.sendRedirect("login"); }
 			req.include(request, response);
 		
-		} catch (SQLException | IOException e) {}
+		} catch (SQLException | IOException | NullPointerException e) {response.sendRedirect("login");}
 	}
 
 	
@@ -90,7 +90,7 @@ public class Cart_handler extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (NullPointerException e) {response.sendRedirect("login");}
 		
 	}
 }
