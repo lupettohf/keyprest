@@ -35,7 +35,7 @@ public class Login_handler extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// Mostra la pagina di login nel caso vine fatto accesso diretto alla servelet. 
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/login.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		req.include(request, response);
 	}
 	
@@ -43,7 +43,7 @@ public class Login_handler extends HttpServlet {
 		String Username = request.getParameter("username");
 		String Password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/login.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		
 		try {
 			String SessionKey = User_utils.doLogin(Username, Password);

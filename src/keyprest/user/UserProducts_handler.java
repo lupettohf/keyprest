@@ -19,7 +19,7 @@ public class UserProducts_handler extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		
-		ArrayList<Orders> orders = new ArrayList<Orders>();
+		
 		HttpSession session = request.getSession();
 		RequestDispatcher req = request.getRequestDispatcher("/template/skeletons/product.jsp");
 		String SessionKey = (String) session.getAttribute("sessionkey");
@@ -27,14 +27,7 @@ public class UserProducts_handler extends HttpServlet{
 		try {
 			if(User_utils.getUser(SessionKey) != null) { 
 
-				orders = Orders_utils.fetchUserOrders(User_utils.getUser(SessionKey).getID());
-			
-				if(!orders.isEmpty())
-				{
-					session.setAttribute("orders", orders);
-				} else {
-					//todo: orders empty
-				}
+
 			} else { response.sendRedirect("login"); }
 			req.include(request, response);
 		

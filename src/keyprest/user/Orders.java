@@ -52,7 +52,7 @@ public class Orders {
 			return Product_utils.productByID(product_id).getName();
 		} catch (SQLException e) {
 			// TODO RIMUOVERE TRY 
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block     
 			e.printStackTrace();
 		}
 		return "false";

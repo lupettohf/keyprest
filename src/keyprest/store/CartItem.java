@@ -81,4 +81,24 @@ public class CartItem {
 		}
 		return "";
 	}
+	
+	public float productDiscountPrice()
+	{
+		try {
+			return Product_utils.productByID(this.product_id).getDiscountPrice();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int productDiscountPercetage()
+	{
+		try {
+			return Product_utils.productByID(this.product_id).getDiscount();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

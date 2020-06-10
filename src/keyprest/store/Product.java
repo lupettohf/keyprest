@@ -84,6 +84,11 @@ public class Product {
 		return this.Region;
 	}
 	
+	public int getStock()
+	{
+		return Product_utils.countKeysStock(this.ID);
+	}
+	
 	public void setRegion(String Region)
 	{
 		this.Region = Region;
@@ -97,11 +102,6 @@ public class Product {
 	public void setDLC(boolean isDLC)
 	{
 		this.Is_DLC = isDLC;
-	}
-	
-	public int stockQuantity()
-	{
-		return Product_utils.countKeysStock(ID);
 	}
 	
 	public float getDiscountPrice()

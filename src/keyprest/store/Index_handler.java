@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import keyprest.database.connectionManager;
 import keyprest.user.User_utils;
 
-@WebServlet(name = "Index_handler", urlPatterns = {"/"})
+@WebServlet(name = "Index_handler", urlPatterns = {"/index"})
 public class Index_handler extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
@@ -46,7 +46,7 @@ public class Index_handler extends HttpServlet{
 					
 			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
 			
-			req = request.getRequestDispatcher("/index.jsp");
+			req = request.getRequestDispatcher("skeletons/pages/index.jsp");
 			
 		} catch (SQLException e) {}
 		req.include(request, response);

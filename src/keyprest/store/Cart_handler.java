@@ -22,7 +22,7 @@ public class Cart_handler extends HttpServlet {
 		
 		ArrayList<CartItem> cart_items = new ArrayList<CartItem>();
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/skeletons/cart.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/cart.jsp");
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		float cur_price = 0;

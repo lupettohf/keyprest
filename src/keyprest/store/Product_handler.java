@@ -22,7 +22,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
-//@WebServlet(name = "Product_handler", urlPatterns = {"/products"})
+@WebServlet(name = "Product_handler", urlPatterns = {"/product"})
 public class Product_handler extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
@@ -31,19 +31,25 @@ public class Product_handler extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		ArrayList<Product> products = new ArrayList<Product>();
+		Product product;
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/skeletons/products.jsp");
-		int start_id = 1;
-		int end_id = 10;
-		
-		//if(!request.getParameter("startid").isEmpty()) { start_id = Integer.parseInt(request.getParameter("startid")); };
-		//if(!request.getParameter("endid").isEmpty()){ end_id = Integer.parseInt(request.getParameter("endid")); };
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/product.jsp");
+		String Product_ID = request.getParameter("id");
+		int _product_ID = 1;
 		
 		try {
-			products = Product_utils.retriveProducts(start_id, end_id);
+			if(!Product_ID.isEmpty())
+			{
+				_product_ID = Integer.parseInt(Product_ID);
+			}
+		} catch(NumberFormatException e) {}
+		
+		
+		try {
 			
-			session.setAttribute("products", products);
+			//TODO spostare try
+			product = Product_utils.productByID(_product_ID);
+			session.setAttribute("product", product);
 			req.include(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
