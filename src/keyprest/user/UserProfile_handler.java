@@ -29,13 +29,13 @@ public class UserProfile_handler extends HttpServlet{
 		
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
-		String Username = (String) session.getAttribute("username");
+		String LoggedIn = (String) session.getAttribute("logged");
 		String SessionKey = (String) session.getAttribute("sessionkey");
-		if(Username == null)
+		if(LoggedIn == "false" || LoggedIn == null)
 		{
-			req = request.getRequestDispatcher("/template/pages/login.jsp");
+			req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		} else {
-			req = request.getRequestDispatcher("/template/pages/user.jsp");
+			req = request.getRequestDispatcher("/skeletons/pages/user.jsp");
 			/*
 			String gavatarHash;
 			try {
@@ -72,15 +72,14 @@ public class UserProfile_handler extends HttpServlet{
 		String Billing_address = request.getParameter("address");
 		
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/user.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/user.jsp");
 		
 		//Verifica che l'utente sia loggato.
 		if(session.getAttribute("username") == null) { 
-			req = request.getRequestDispatcher("/template/pages/login.jsp");
+			req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 			req.include(request, response);
 		}
 		
-		String Session_username = (String) session.getAttribute("username");
 		String Session_Key = (String) session.getAttribute("sessionkey");
 		
 		// Se l'utente popola i campi di cambio password la richiesta viene passata. 

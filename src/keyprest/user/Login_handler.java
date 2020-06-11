@@ -34,8 +34,18 @@ public class Login_handler extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// Mostra la pagina di login nel caso vine fatto accesso diretto alla servelet. 
-		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
+		HttpSession session = request.getSession();
+		RequestDispatcher req = null;
+		
+		String Logged_In = (String) session.getAttribute("logged");
+		
+		if(Logged_In == null)
+		{
+			 req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
+		} else {
+			 req = request.getRequestDispatcher("/skeletons/pages/user.jsp");
+		}
+				
 		req.include(request, response);
 	}
 	
@@ -52,7 +62,7 @@ public class Login_handler extends HttpServlet {
 			
 			if(!SessionKey.equals("false") && !SessionKey.isEmpty()) { 
 				User user = User_utils.getUser(SessionKey);
-				session.setAttribute("username", user.getUsername()); 
+				session.setAttribute("logged", "true"); 
 				session.setAttribute("sessionkey", SessionKey);
 				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }
 				

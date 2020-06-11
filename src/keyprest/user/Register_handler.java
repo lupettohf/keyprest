@@ -29,7 +29,7 @@ public class Register_handler extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// Mostra la pagina di registrazione nel caso vine fatto accesso diretto alla servelet. 
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/register.jsp");
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/register.jsp");
 		req.include(request, response);
 	}
 	
@@ -44,10 +44,10 @@ public class Register_handler extends HttpServlet{
 		try {
 			if(User_utils.createUser(Username, Password, Password_confim, EMail)) 
 			{
-				RequestDispatcher req = request.getRequestDispatcher("/template/pages/login.jsp");
+				RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 				req.include(request, response);
 			} else {
-				RequestDispatcher req = request.getRequestDispatcher("/template/pages/register.jsp");
+				RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/register.jsp");
 				session.setAttribute("error", "Registration Failed");	
 				req.include(request, response);
 			}

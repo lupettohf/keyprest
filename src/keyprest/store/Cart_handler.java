@@ -34,12 +34,15 @@ public class Cart_handler extends HttpServlet {
 				if(!cart_items.isEmpty())
 				{
 					session.setAttribute("cart", cart_items);
+					session.setAttribute("empty", false);
 					for(CartItem item : cart_items) {
 						cur_price = item.productPrice() + cur_price;
 					}
 				
 				session.setAttribute("subtotal", String.valueOf(cur_price));
 				} else {
+					
+					session.setAttribute("empty", true);
 					//todo:cart is empty
 				}
 			} else { response.sendRedirect("login"); }

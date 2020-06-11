@@ -4,8 +4,12 @@
 <%@page import="keyprest.store.*"%>
 <%@page import="keyprest.user.*"%>
 <%@page import="java.util.ArrayList" %>
-<% ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");  %>
-<% String subtotal = (String) session.getAttribute("subtotal"); %>
+<% 	ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
+	String subtotal = (String) session.getAttribute("subtotal");
+	Boolean cartEmpty = (Boolean) session.getAttribute("empty");
+	
+	pageContext.setAttribute("cartEmpty", cartEmpty);
+%>
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />
 
@@ -28,7 +32,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-<c:forEach var="item" items="${cart}">                                
+<c:if test="${!cartEmpty}">
+<c:forEach var="item" items="${cart}">                             
                                     <tr>
                                         <td class="cart_product_desc">
                                             <h5>${item.productName()}</h5>
@@ -52,9 +57,18 @@
     										</form>
                                        	</td>
                                     </tr>
-</c:forEach>                                    
+</c:forEach>  
+</c:if>                           
                                 </tbody>
                             </table>
+<c:if test="${cartEmpty}">
+                            <div class="col-10 text-center">
+     							<h2>The cart is out of mana <i class="fa fa-frown-o" aria-hidden="true"></i></h2>
+     							<a style="font-size: 1em; color: #d32020;" href="shop">
+     								<h6 class="text-center" >Go buy some potions at the store!</h6>
+     							</a>
+     						</div>
+</c:if>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4">

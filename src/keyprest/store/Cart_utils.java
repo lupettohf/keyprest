@@ -46,37 +46,69 @@ public class Cart_utils {
 				return _cart;
 			}
 		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 		
 		return null;
 	}
 	
-	public static boolean addToCart(int product_id, String session_key) throws SQLException
+	public static int getCartElements(String session_key)
+	{
+		String QUERY = "SELECT COUNT(*) AS incart FROM `cart` WHERE user_id = ?";
+		
+		int _id = 0;
+		
+		try {
+			if(User_utils.getUser(session_key) == null) {
+				return 0;
+			}else{
+				_id = User_utils.getUser(session_key).getID();
+			}
+		
+			if(_id > 0) {
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		
+				preparedStatement.setInt(1, _id);
+		
+				ResultSet rs = preparedStatement.executeQuery();
+		
+				ArrayList<CartItem> _cart = new ArrayList<CartItem>();
+		
+				while(rs.next())
+				{
+					return rs.getInt("incart");
+				}
+			}
+		
+		} catch (SQLException e) {}
+		
+		return 0;
+	}
+	
+	public static boolean addToCart(int product_id, String session_key)
 	{
 		String QUERY = "INSERT INTO cart" +
 				"(product_id, user_id) VALUES (?, ?)";
 		
 		int _id = 0;
 		
-		if(Product_utils.productByID(product_id) == null  || User_utils.getUser(session_key) == null) {
-			return false;
-		}else{
-			_id = User_utils.getUser(session_key).getID();
-		}
+		try {
+			if(Product_utils.productByID(product_id) == null  || User_utils.getUser(session_key) == null) {
+				return false;
+			}else{
+				_id = User_utils.getUser(session_key).getID();
+			}
 		
-		if(_id > 0)
-		{
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			if(_id > 0)
+			{
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
-			preparedStatement.setInt(1, product_id);
-			preparedStatement.setInt(2, _id);
+				preparedStatement.setInt(1, product_id);
+				preparedStatement.setInt(2, _id);
 
-			if(preparedStatement.executeUpdate() == 1) {return true;}	
-		}
-
+				if(preparedStatement.executeUpdate() == 1) {return true;}	
+			} 
+		} catch (SQLException e) {}
+		
 		return false;
 	}
 	
@@ -87,29 +119,27 @@ public class Cart_utils {
 		int _id = 0;
 		
 		try {
-			
 			if(User_utils.getUser(session_key) == null) {
 				return false;
 			}else{
 				_id = User_utils.getUser(session_key).getID();
 			}
 		
-		
 			if(_id > 0)
 			{
 				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
 				preparedStatement.setInt(1, _id);
-			
 				preparedStatement.setInt(2, cart_id);
-				System.out.println(_id + " " + cart_id);
 
 				if(preparedStatement.executeUpdate() == 1) {return true;}	
 			}
 
 			return false;
 		
-		} catch (SQLException e) {return false;}
+		} catch (SQLException e) {}
+		
+		return false;
 	}
 
 }

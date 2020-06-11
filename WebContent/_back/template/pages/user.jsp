@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../skeletons/header.jsp" />
-<%@page import="keyprest.user.*"%>
+
 
 <jsp:include page="../skeletons/error.jsp" />
 
@@ -39,9 +39,9 @@
         <h4>Billing Informations</h4>
         <div class="form-group">
           <label for="realname">Real Name:</label>
-          <input type="realname" name="realname" value="<c:out value="${realname}" escapeXml="false"/>" class="form-control">
+          <input type="realname" name="realname" value="" class="form-control">
           <label for="address">Billing Address:</label>
-          <input type="address" name="address" value="<c:out value="${billingaddr}" escapeXml="false"/>" class="form-control">
+          <input type="address" name="address" value="" class="form-control">
         </div>
         <button type="submit" class="btn btn-default submit" value="Submit">Change</button>
       </form>
