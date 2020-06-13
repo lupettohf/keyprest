@@ -36,19 +36,25 @@ public class Cart_handler extends HttpServlet {
 					session.setAttribute("cart", cart_items);
 					session.setAttribute("empty", false);
 					for(CartItem item : cart_items) {
-						cur_price = item.productPrice() + cur_price;
+						if(item.productDiscountPercetage() > 0)
+						{
+							cur_price = item.productDiscountPrice() + cur_price;
+						} else {
+							cur_price = item.productPrice() + cur_price;
+						}
+						
 					}
 				
 				session.setAttribute("subtotal", String.valueOf(cur_price));
 				} else {
-					
+					session.setAttribute("subtotal", String.valueOf(0));
 					session.setAttribute("empty", true);
 					//todo:cart is empty
 				}
 			} else { response.sendRedirect("login"); }
 			req.include(request, response);
 		
-		} catch (SQLException | IOException | NullPointerException e) {response.sendRedirect("login");}
+		} catch (IOException | NullPointerException e) {response.sendRedirect("login");}
 	}
 
 	

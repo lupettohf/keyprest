@@ -53,23 +53,19 @@ public class KeyImporter_handler extends HttpServlet{
 		
 		if(_ProductID <=0) { session.setAttribute("error", "L'id prodotto é errato."); }
 		
-		try {
-			if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey)))
-			{
-				if(Keys.isEmpty()) {
-					session.setAttribute("error", "Non vi sono pervenute chiavi.");
+		if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey)))
+		{
+			if(Keys.isEmpty()) {
+				session.setAttribute("error", "Non vi sono pervenute chiavi.");
+			} else {
+				_Imported = importKeys(Keys, _ProductID);
+				
+				if(_Imported > 0) { 
+					session.setAttribute("success", "Sono state importate " + _Imported + " chiavi.");
 				} else {
-					_Imported = importKeys(Keys, _ProductID);
-					
-					if(_Imported > 0) { 
-						session.setAttribute("success", "Sono state importate " + _Imported + " chiavi.");
-					} else {
-						session.setAttribute("error", "Si é verificato un errore nell'importazione.");
-					}
+					session.setAttribute("error", "Si é verificato un errore nell'importazione.");
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 		req.include(request, response);

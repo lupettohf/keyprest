@@ -42,7 +42,7 @@ public class UserProfile_handler extends HttpServlet{
 				gavatarHash = gavatarMD5(User_utils.getUser(SessionKey).getMailAddress());
 				session.setAttribute("gavatar", gavatarHash);
 			} catch (SQLException e) {e.printStackTrace();}*/
-			ArrayList<Orders> orders = new ArrayList<Orders>();
+			ArrayList<Order> orders = new ArrayList<Order>();
 			
 			try {
 				orders = Orders_utils.fetchUserOrders(User_utils.getUser(SessionKey).getID());
@@ -53,7 +53,7 @@ public class UserProfile_handler extends HttpServlet{
 				} else {
 					//todo: orders empty
 				}
-			} catch (SQLException | NullPointerException e) {
+			} catch (NullPointerException e) {
 				// TODO RIMUOVERE TRY
 				// TODO Auto-generated catch block
 				e.printStackTrace();

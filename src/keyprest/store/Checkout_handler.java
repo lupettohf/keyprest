@@ -54,6 +54,6 @@ public class Checkout_handler extends HttpServlet{
 				req.include(request, response);
 			
 			}else {response.sendRedirect("login");}
-		} catch (SQLException | ServletException | IOException e) {}
+		} catch (ServletException | IOException e) {}
 	}
 }

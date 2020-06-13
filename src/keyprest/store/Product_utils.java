@@ -139,7 +139,28 @@ public class Product_utils {
 		
 		return products;
 	}
+
+	/*
+	 * Conta il numero di prodotti disponibili.
+	 */
 	
+	public static int countProducts()
+	{
+		
+		String QUERY = "SELECT COUNT(*) AS products FROM `products`";
+		
+		try {
+			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+				
+			ResultSet r = preparedStatement.executeQuery();
+		
+			while(r.next()){ return r.getInt("products"); }
+		
+		} catch (SQLException e) { return 0; }
+		
+		return 0;
+		
+	}	
 	
 	/*
 	 * Conta il numero di key disponibili sul prodotto.

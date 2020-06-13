@@ -23,35 +23,6 @@ public class EditProduct_handler extends HttpServlet{
 		connectionManager.createConnection();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		RequestDispatcher req = null;
-		
-		if(session.getAttribute("username") == null)
-		{
-			req = request.getRequestDispatcher("login.jsp");
-		} else if((boolean) session.getAttribute("housekeeper")) {
-			req = request.getRequestDispatcher("/template/pages/edit_product.jsp");
-		} else {
-			req = request.getRequestDispatcher("user.jsp");
-		}
-		
-		int Product_ID = Integer.parseInt(request.getParameter("product_id"));
-		
-		if(Product_ID <= 0) { Product_ID = 1; } 
-		
-		Product Current_Product;
-		
-		try {
-			Current_Product = Product_utils.productByID(Product_ID);
-			session.setAttribute("product", Current_Product);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		req.include(request, response);
-	}
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int Product_ID = Integer.parseInt(request.getParameter("product_id"));
 		String Product_name = request.getParameter("product_name");
@@ -64,12 +35,11 @@ public class EditProduct_handler extends HttpServlet{
 	
 	
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/edit_product.jsp");
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		//Verifica che l'utente sia loggato e sia admin.
 		
-		if(!(Product_ID <= 0)) { req.include(request, response); }
+		if((Product_ID != 0)) { System.out.println(Product_ID);}
 		try {
 			if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey))) { 
 				if(Product_utils.updateProduct(Product_ID, new Product(
@@ -82,13 +52,11 @@ public class EditProduct_handler extends HttpServlet{
 						Product_region, 
 						Product_isDLC
 					))) 
-				{ session.setAttribute("success", "Prodotto modificato con successo"); } else { session.setAttribute("error", "Si é verificato un errore nella modifica del prodotto.");}		
+				{session.setAttribute("success", "Prodotto modificato con successo"); } else { session.setAttribute("error", "Si é verificato un errore nella modifica del prodotto.");}		
 			}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch bloc
 			e1.printStackTrace();
 		} 
-	
-		req.include(request, response);
 	}
 }

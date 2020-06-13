@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import keyprest.store.Product_utils;
 
-public class Orders {
+public class Order {
 	
 	private int order_id;
 	private int product_id;
@@ -12,7 +12,7 @@ public class Orders {
 	private float final_price;
 	private int key_id;
 	
-	public Orders(int order_id, int product_id, int user_id, float final_price, int key_id)
+	public Order(int order_id, int product_id, int user_id, float final_price, int key_id)
 	{
 		this.order_id = order_id;
 		this.product_id = product_id;

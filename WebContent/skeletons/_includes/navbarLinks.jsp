@@ -20,7 +20,7 @@
                     <li><a href="index">Home</a></li>
                     <li><a href="shop">Shop</a></li>
                     <c:if test="${logged_in}">
-                    <li><a href="cart">Cart</a></li>
+                    <jsp:include page="navbarCart.jsp" />
                     <li><a href="user">Your Profile</a></li>
                     <li><a href="logout">Logout</a></li>
                     </c:if>

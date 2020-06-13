@@ -26,23 +26,17 @@ public class CreateProduct_handler extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher req = null;
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/housekeeping/createproduct.jsp");
 		
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		if(SessionKey == null)
 		{
 			response.sendRedirect("login");
-		} else
-			try {
-				if(User_utils.isAdmin(SessionKey)) {
-					response.sendRedirect("housekeeping");
-				} else {
-					response.sendRedirect("user");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} else if(User_utils.isAdmin(SessionKey)) {
+			
+		} else {
+			response.sendRedirect("user");
+		}
 		
 		req.include(request, response);
 	}
@@ -60,10 +54,7 @@ public class CreateProduct_handler extends HttpServlet{
 		HttpSession session = request.getSession();
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
-		//Verifica che l'utente sia loggato e sia admin.
-		try {
-			if(SessionKey == null || !User_utils.isAdmin(SessionKey)) { return; }
-		} catch (SQLException e) {}
+		if(SessionKey == null || !User_utils.isAdmin(SessionKey)) { return; }
 	
 		try {
 			if(Product_utils.addNewProduct(new Product(

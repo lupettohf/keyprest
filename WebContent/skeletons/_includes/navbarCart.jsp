@@ -22,9 +22,8 @@
     pageContext.setAttribute("logged_in", logged_in);
     
  %>
-			<c:if test="${logged_in}">
-             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="cart" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(${cartElements})</span></a>
-            </div>
-            </c:if>
+<c:if test="${logged_in}">
+<li><a href="cart">Cart <span>(${cartElements})</span></a></li>
+</c:if>
+            
+            

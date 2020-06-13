@@ -10,7 +10,7 @@ import keyprest.store.CartItem;
 
 public class Orders_utils {
 	
-	public static ArrayList<Orders> fetchUserOrders(int user_id)
+	public static ArrayList<Order> fetchUserOrders(int user_id)
 	{
 		String QUERY = "SELECT * FROM orders WHERE user = ?";
 		
@@ -23,11 +23,11 @@ public class Orders_utils {
 		
 				ResultSet rs = preparedStatement.executeQuery();
 		
-				ArrayList<Orders> _orders = new ArrayList<Orders>();
+				ArrayList<Order> _orders = new ArrayList<Order>();
 		
 				while(rs.next())
 				{
-					_orders.add(new Orders(
+					_orders.add(new Order(
 							rs.getInt("id"),
 							rs.getInt("product_id"),
 							rs.getInt("user"),
@@ -39,9 +39,9 @@ public class Orders_utils {
 				return _orders;
 			}
 		
-		} catch (SQLException e) {return new ArrayList<Orders>();}
+		} catch (SQLException e) {return new ArrayList<Order>();}
 		
-		return new ArrayList<Orders>();
+		return new ArrayList<Order>();
 	}
 	
 	public static String getKey(int key_id)

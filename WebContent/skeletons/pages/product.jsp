@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-7">
 						<div class="carousel-item active">
-							<img class="d-block w-100" src="https://www.stevensegallery.com/300/100/">
+							<img class="d-block w-100" src="https://www.stevensegallery.com/300/300/">
                      	</div>
                     </div>
                     <div class="col-12 col-lg-5">
@@ -44,7 +44,6 @@
 
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post" action="cart">
-                               	<input type="hidden" name="action" value="add_product">
   								<input type="hidden" name="product_id" value="${product.getID()}">	
                                 <button type="submit" class="btn amado-btn">Add to cart</button>
                             </form>

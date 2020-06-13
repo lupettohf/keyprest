@@ -55,6 +55,5 @@
                 <a href="#" class="btn amado-btn active">New this week</a>
             </div>-->
             
-            <jsp:include page="_includes/navbarCart.jsp" />
         </header>
         <!-- Header Area End -->

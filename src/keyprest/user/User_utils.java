@@ -38,31 +38,37 @@ public class User_utils {
 		
 	}
 	
-	public static User getUser(String SessionKey) throws SQLException
+	public static User getUser(String SessionKey)
 	{
 		String QUERY = "SELECT * FROM users WHERE sessionkey = ?";
 		
 		if(SessionKey.isEmpty()) { return null; }
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement;
 		
-		preparedStatement.setString(1, SessionKey);
+		try {
+			preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-		ResultSet rs = preparedStatement.executeQuery();
+			preparedStatement.setString(1, SessionKey);
 		
-		//Se ci sono risultati nella query, il login é corretto. 
-		if(rs.next()) { 
-			return new User(
-					rs.getInt("id"), 
-					rs.getString("username"), 
-					rs.getString("password"), 
-					rs.getString("mailaddr"), 
-					rs.getString("realname"), 
-					rs.getString("billing_address"),
-					rs.getInt("points"), 
-					rs.getBoolean("administrator")					
-		); 		
-		} else { return null; }
+			ResultSet rs = preparedStatement.executeQuery();
+		
+			//Se ci sono risultati nella query, il login é corretto. 
+			if(rs.next()) { 
+				return new User(
+						rs.getInt("id"), 
+						rs.getString("username"), 
+						rs.getString("password"), 
+						rs.getString("mailaddr"), 
+						rs.getString("realname"), 
+						rs.getString("billing_address"),
+						rs.getInt("points"), 
+						rs.getBoolean("administrator")					
+				); 		
+			} else { return null; }
+		
+		} catch (SQLException e) {}
+		return null;
 	}
 	
 	public static boolean createUser(String Username, String Password, String Password_confirm, String EMail) throws SQLException, ClassNotFoundException
@@ -165,19 +171,25 @@ public class User_utils {
 		return false;
 	}
 	
-	public static boolean isAdmin(String SessionKey) throws SQLException
+	public static boolean isAdmin(String SessionKey)
 	{
 		String QUERY = "SELECT id FROM users WHERE administrator = TRUE AND sessionkey = ?";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		try {
 		
-		if(SessionKey.isEmpty()) { return false; }
+			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-		preparedStatement.setString(1, SessionKey);
+			if(SessionKey.isEmpty()) { return false; }		
 		
-		ResultSet rs = preparedStatement.executeQuery();
+			preparedStatement.setString(1, SessionKey);
 		
-		if(rs.next()) { return true; } else { return false; }
+			ResultSet rs = preparedStatement.executeQuery();
+		
+			if(rs.next()) { return true; } 
+			
+		} catch (SQLException e) { return false; }
+		
+		return false;
 	}
 	
 	private static String generateSecureString() {

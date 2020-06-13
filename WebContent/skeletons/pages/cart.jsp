@@ -36,7 +36,7 @@
 <c:forEach var="item" items="${cart}">                             
                                     <tr>
                                         <td class="cart_product_desc">
-                                            <h5>${item.productName()}</h5>
+                                            <h5>${item.getProductName()}</h5>
                                         </td>
                                         <td class="price">
                                         <c:if test="${item.productDiscountPercetage() > 0}">
@@ -75,7 +75,7 @@
                         <div class="cart-summary">
                             <h5>Transaction</h5>
                             <ul class="summary-table">
-                                <li><span>Total:</span> <span>${subtotal}$</span></li>
+                                <li><span>Total:</span> <span>${subtotal} $</span></li>
                             </ul>
                             <div class="cart-btn mt-100">
                                 <a href="cart.html" class="btn amado-btn w-100">Checkout</a>

@@ -30,44 +30,89 @@ public class Housekeeping_handler extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher req = null;
-		
-		String StartID = request.getParameter("sid");
-		String EndID = request.getParameter("eid");
-		
-		int _StartID = 0;
-		int _EndID = 10;
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/housekeeping/index.jsp");
 		
 		String SessionKey = (String) session.getAttribute("sessionkey");
-		if(SessionKey == null)
+		String Action = request.getParameter("action");
+		String ProductID = request.getParameter("id");
+		String Page = request.getParameter("p");
+		
+		
+		if(SessionKey != null)
 		{
-			req = request.getRequestDispatcher("/template/pages/login.jsp");
-		} else
-			try {
-				if(User_utils.isAdmin(SessionKey)) {
-					req = request.getRequestDispatcher("/template/pages/housekeeping.jsp");
-					
-					if(StartID != null || EndID != null) {
-						try {
-							_StartID = Integer.parseInt(StartID);
-							_EndID = Integer.parseInt(EndID);
-						} catch(NumberFormatException e) {}
-						
+			if(User_utils.isAdmin(SessionKey)) {
+				
+				int _StartID = 0;
+				int _EndID = 0;
+				int Product_ID = 0;
+				
+				try {Product_ID = Integer.parseInt(ProductID); } catch(NumberFormatException e) {}		
+				
+				setPage(request, session, _StartID, _EndID);
+				setProduct(request, session, Product_ID);
+				
+				if(Action != null)
+				{
+					switch(Action) {
+						default:
+							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/index.jsp");
+							break;
+						case "edit":														
+							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/editproduct.jsp");
+							break;
+						case "add":
+							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/createproduct.jsp");
+							break;
 					}
-					
-					// Manda la lista dei prodotti
-						
-					session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
-				} else {
-					req = request.getRequestDispatcher("/template/pages/user.jsp");
-					response.sendRedirect("user");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				} 
+			} else { response.sendRedirect("user"); }
+		}				
+
 		req.include(request, response);
 		
 	}
 	
+	private void setProduct(HttpServletRequest request, HttpSession session, int Product_ID)
+	{	
+		if(Product_ID <= 0) { Product_ID = 1; } 
+		
+		Product Current_Product;
+		
+		try {
+			Current_Product = Product_utils.productByID(Product_ID);
+			session.setAttribute("product", Current_Product);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void setPage(HttpServletRequest request, HttpSession session, int _StartID, int _EndID) {
+		int totalProducts = Product_utils.countProducts();
+		
+		int totalPages = totalProducts / 10;
+		int _Page = 0;
+		
+		String Page = request.getParameter("p");
+		
+		if(Page != null) {
+			try {_Page = Integer.parseInt(Page); } catch(NumberFormatException e) {}						
+		}
+
+		if(_Page <= totalPages)
+		{			
+			_EndID = _StartID + 10;
+			
+			if(_EndID > totalProducts) { _EndID = totalProducts; }
+		}
+		
+		session.setAttribute("totalpages", totalPages);		
+		session.setAttribute("curpage", _Page);
+		
+		try {
+			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block rimuovere
+			e.printStackTrace();
+		}
+	}
 }
