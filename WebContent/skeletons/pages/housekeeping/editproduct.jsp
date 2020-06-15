@@ -46,19 +46,19 @@
                                    	<div class="col-3 mb-3 custom-checkbox">
                                         <input type="checkbox" name="product_isdlc" class="custom-control-input" id="is_dlc" value="${ product.IsDLC() }">
                                         <label class="custom-control-label" for="is_dlc"> DLC </label>
-                                    </div>                            
+                                    </div>                           
                                     <div class="col-10">
                                       <div class="cart-btn mt-100">
                                       	  <input type="hidden" id="product_id" name="product_id" value="${ product.getID() }">
-                                          <input type="submit" class="btn amado-btn w-60 float-right" value="Create Product">
+                                          <input type="submit" class="btn amado-btn w-60 float-right" value="Edit Product">
+                                          <a class="amado-btn text-center" href="housekeeping?action=uploadimg&id=${product.getID()}"> Upload Thumbnail</a> 
                                       </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
 <jsp:include page="../../footer.jsp" />

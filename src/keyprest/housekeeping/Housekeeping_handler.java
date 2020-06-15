@@ -63,6 +63,12 @@ public class Housekeeping_handler extends HttpServlet{
 						case "add":
 							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/createproduct.jsp");
 							break;
+						case "import":
+							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/importkeys.jsp");
+							break;
+						case "uploadimg":
+							req = request.getRequestDispatcher("/skeletons/pages/housekeeping/uploadimage.jsp");
+							break;
 					}
 				} 
 			} else { response.sendRedirect("user"); }

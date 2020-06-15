@@ -93,7 +93,7 @@ public class Product_utils {
 	{
 		
 		String QUERY = "INSERT INTO `keys` (`product_id`, `key`, `sold`) " +
-				"VALUES\n" + 
+				"VALUES" + 
 				"	(?, ?, 0)";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);

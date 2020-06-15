@@ -69,9 +69,11 @@ public class ImageImporter_handler extends HttpServlet {
 				if (part != null && part.getSize() > 0) {
 					String fileName = ProductID + ".png";
 					String contentType = part.getContentType();
-
-					part.write(uploadFilePath + File.separator + fileName);
 					
+					if(contentType.contains("image")){
+						part.write(uploadFilePath + File.separator + fileName);
+					}
+						
 					writer.append("File successfully uploaded to " 
 							+ uploadFolder.getAbsolutePath() 
 							+ File.separator

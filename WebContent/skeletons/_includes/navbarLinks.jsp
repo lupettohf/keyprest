@@ -5,12 +5,19 @@
 
  <% 
     String LoggedIn = (String) session.getAttribute("logged");
+ 	Boolean Housekeeper = (Boolean) session.getAttribute("housekeeper");
     boolean logged_in;
     
     if(LoggedIn == null)
     {
     	logged_in = false;
-    } else { logged_in = true; }
+    } else { 
+    	logged_in = true; 
+    	if(Housekeeper != null)
+    	{
+    		pageContext.setAttribute("housekeeper", Housekeeper);
+    	} else { Housekeeper = false; }
+    }
     
     pageContext.setAttribute("logged_in", logged_in);
  %>
@@ -22,6 +29,9 @@
                     <c:if test="${logged_in}">
                     <jsp:include page="navbarCart.jsp" />
                     <li><a href="user">Your Profile</a></li>
+                    <c:if test="${housekeeper}">
+                    <li><a href="housekeeping">Housekeeping</a></li>
+                    </c:if>
                     <li><a href="logout">Logout</a></li>
                     </c:if>
                     <c:if test="${!logged_in}">

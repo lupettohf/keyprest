@@ -36,7 +36,7 @@
 <c:forEach var="item" items="${cart}">                             
                                     <tr>
                                         <td class="cart_product_desc">
-                                            <h5>${item.getProductName()}</h5>
+                                            <h5>${item.productName()}</h5>
                                         </td>
                                         <td class="price">
                                         <c:if test="${item.productDiscountPercetage() > 0}">

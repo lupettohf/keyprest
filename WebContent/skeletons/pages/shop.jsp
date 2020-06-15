@@ -18,7 +18,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="https://www.stevensegallery.com/300/300/" alt="">
+                                <img src="static/images/products/${product.getID()}.png" alt="">
                             </div>
 
                             <div class="product-description d-flex align-items-center justify-content-between">

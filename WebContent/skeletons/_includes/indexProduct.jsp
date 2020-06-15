@@ -11,7 +11,7 @@
                 <div class="single-products-catagory clearfix">
                     <a href="product?id=${product.getID()}">
                         <!-- <img src="static/img/bg-img/${product.getID()}.png" alt=""> -->
-                        <img src="https://www.stevensegallery.com/300/600/" alt=""> 
+                        <img src="static/images/products/${product.getID()}.png" alt=""> 
                         <div class="hover-content">
                             <div class="line"></div>
                             <c:if test="${product.getDiscountPrice() > 0}">

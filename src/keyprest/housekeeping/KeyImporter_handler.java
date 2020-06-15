@@ -27,21 +27,20 @@ import keyprest.store.Product;
 import keyprest.store.Product_utils;
 import keyprest.user.User_utils;
 
-@WebServlet(name = "KeyImporter_handler", urlPatterns = {"/importkey"})
+@WebServlet(name = "KeyImporter_handler", urlPatterns = {"/importkeys"})
 public class KeyImporter_handler extends HttpServlet{
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		RequestDispatcher req = request.getRequestDispatcher("/template/pages/housekeeping.jsp");
-		
+		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/housekeeping/index.jsp");
+	
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		String Keys = request.getParameter("keys");
 		String ProductID = request.getParameter("productid");
 		int _ProductID = 0;
 		int _Imported = 0;		
-		
 		if(ProductID != null)
 		{
 			try {
@@ -51,12 +50,14 @@ public class KeyImporter_handler extends HttpServlet{
 			}
 		}
 		
-		if(_ProductID <=0) { session.setAttribute("error", "L'id prodotto é errato."); }
+		if(_ProductID <=0) {session.setAttribute("error", "L'id prodotto é errato."); }
 		
-		if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey)))
+		if(SessionKey == null || !(User_utils.isAdmin(SessionKey)))
 		{
+			 System.out.println(Keys + "0");
 			if(Keys.isEmpty()) {
 				session.setAttribute("error", "Non vi sono pervenute chiavi.");
+				 System.out.println(Keys + "1");
 			} else {
 				_Imported = importKeys(Keys, _ProductID);
 				
@@ -73,14 +74,16 @@ public class KeyImporter_handler extends HttpServlet{
     
 	private static int importKeys(String Keys, int product_id)
 	{
+		
 		Scanner scanner = new Scanner(Keys);
 		int _imported = 0;
-		
 		while (scanner.hasNextLine()) {
 			  String line = scanner.nextLine();
+			  System.out.println(line);
 			  try {
 				if(Product_utils.importKey(product_id, line)) {_imported++;}
 			} catch (SQLException e) {
+				System.out.println(e.toString());
 				e.printStackTrace();
 			}
 		}
