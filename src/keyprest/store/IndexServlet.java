@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import keyprest.database.connectionManager;
-import keyprest.user.User_utils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "Index_handler", urlPatterns = {"/index"})
-public class Index_handler extends HttpServlet{
+@WebServlet(name = "IndexServlet", urlPatterns = {"/index"})
+public class IndexServlet extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
@@ -24,7 +24,7 @@ public class Index_handler extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(Product_utils.countKeysStock(1));	
+		System.out.println(ProductUtils.countKeysStock(1));	
 		
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
@@ -35,7 +35,7 @@ public class Index_handler extends HttpServlet{
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		try {	
 					
-			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
+			session.setAttribute("products", ProductUtils.retriveProducts(_StartID, _EndID));
 			
 			req = request.getRequestDispatcher("skeletons/pages/index.jsp");
 			

@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import keyprest.user.User_utils;
+import keyprest.user.UserUtils;
 
 
-@WebServlet(name = "Checkout_handler", urlPatterns = {"/checkout"})
-public class Checkout_handler extends HttpServlet{
+@WebServlet(name = "CheckoutServlet", urlPatterns = {"/checkout"})
+public class CheckoutServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{		
@@ -29,9 +29,9 @@ public class Checkout_handler extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		
 		try {
-			if(SessionKey != null || User_utils.getUser(SessionKey) != null) {
+			if(SessionKey != null || UserUtils.getUser(SessionKey) != null) {
 			
-				cart_items = Cart_utils.getCartItems(SessionKey);
+				cart_items = CartUtils.getCartItems(SessionKey);
 				
 				if(cart_items == null) { response.sendRedirect("login"); } 
 				
@@ -42,7 +42,7 @@ public class Checkout_handler extends HttpServlet{
 					{
 						for(CartItem item: cart_items)
 						{
-							Cart_utils.deleteFromCart(SessionKey, item.getCartID());
+							CartUtils.deleteFromCart(SessionKey, item.getCartID());
 							out.println("<h6>added " + item.productName() + "</h6>"); 
 						}
 						

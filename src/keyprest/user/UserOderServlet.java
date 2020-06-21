@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import keyprest.store.CartItem;
-import keyprest.store.Cart_utils;
-import keyprest.store.Product_utils;
+import keyprest.store.CartUtils;
+import keyprest.store.ProductUtils;
 
-@WebServlet(name = "UserOrders_handler", urlPatterns = {"/orders"})
-public class UserOrders_handler extends HttpServlet{
+@WebServlet(name = "UserOrdersServlet", urlPatterns = {"/orders"})
+public class UserOderServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -31,11 +31,11 @@ public class UserOrders_handler extends HttpServlet{
 		
 		if(SessionKey != null)
 		{
-			User _user = User_utils.getUser(SessionKey);
+			User _user = UserUtils.getUser(SessionKey);
 			
 			if(_user != null)
 			{
-				ArrayList<Order> orders = Orders_utils.fetchUserOrders(_user.getID());
+				ArrayList<Order> orders = OrdersUtils.fetchUserOrders(_user.getID());
 				
 				if(orders.isEmpty()) { }
 				

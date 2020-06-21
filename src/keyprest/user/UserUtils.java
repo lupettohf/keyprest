@@ -11,7 +11,7 @@ import keyprest.database.connectionManager;
 import keyprest.utils.Globals;
 import keyprest.utils.Validators;
 
-public class User_utils {
+public class UserUtils {
 
 	private static String hashPassword(String Password)
 	{

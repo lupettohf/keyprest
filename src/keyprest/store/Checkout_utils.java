@@ -35,7 +35,7 @@ public class Checkout_utils {
 		if(product_id <= 0 || user_id <= 0) {return false;} 
 		Product _p;
 		try {
-			_p = Product_utils.productByID(product_id);
+			_p = ProductUtils.productByID(product_id);
 		
 			if(_p != null)
 			{

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import keyprest.user.User_utils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "Cart_handler", urlPatterns = {"/cart"})
-public class Cart_handler extends HttpServlet {
+@WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
+public class CartServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -27,9 +27,9 @@ public class Cart_handler extends HttpServlet {
 		
 		float cur_price = 0;
 		try {
-			if(User_utils.getUser(SessionKey) != null) { 
+			if(UserUtils.getUser(SessionKey) != null) { 
 
-				cart_items = Cart_utils.getCartItems(SessionKey);
+				cart_items = CartUtils.getCartItems(SessionKey);
 			
 				if(!cart_items.isEmpty())
 				{
@@ -77,12 +77,12 @@ public class Cart_handler extends HttpServlet {
 		}
 	
 		try {
-			if(!(User_utils.getUser(SessionKey) != null)) { response.sendRedirect("login"); }
+			if(!(UserUtils.getUser(SessionKey) != null)) { response.sendRedirect("login"); }
 		
 			if(Action.contentEquals("add_product"))
 			{	
-				if(Product_utils.productByID(Product_id) != null){
-					Cart_utils.addToCart(Product_id, SessionKey);
+				if(ProductUtils.productByID(Product_id) != null){
+					CartUtils.addToCart(Product_id, SessionKey);
 					//TODO: Aggiungere messaggi di feedback.
 					response.sendRedirect("cart");
 				}
@@ -91,7 +91,7 @@ public class Cart_handler extends HttpServlet {
 			if(Action.contentEquals("delete_product"))
 			{
 				
-				Cart_utils.deleteFromCart(SessionKey, Cart_id);
+				CartUtils.deleteFromCart(SessionKey, Cart_id);
 				response.sendRedirect("cart");
 				//TODO: Aggiungere messaggi di feedback.
 			}

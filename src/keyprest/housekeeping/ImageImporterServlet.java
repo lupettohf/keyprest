@@ -34,14 +34,14 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import keyprest.store.Product;
-import keyprest.store.Product_utils;
-import keyprest.user.User_utils;
+import keyprest.store.ProductUtils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "ImageImporter_handler", urlPatterns = {"/uploadimage"})
+@WebServlet(name = "ImageImporterServlet", urlPatterns = {"/uploadimage"})
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
-public class ImageImporter_handler extends HttpServlet {
+public class ImageImporterServlet extends HttpServlet {
 	
 	private final String UPLOAD_DIRECTORY = "/static/images/products";
 

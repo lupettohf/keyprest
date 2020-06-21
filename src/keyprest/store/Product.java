@@ -86,7 +86,7 @@ public class Product {
 	
 	public int getStock()
 	{
-		return Product_utils.countKeysStock(this.ID);
+		return ProductUtils.countKeysStock(this.ID);
 	}
 	
 	public void setRegion(String Region)

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import keyprest.database.connectionManager;
 
-@WebServlet(name = "Shop_handler", urlPatterns = {"/shop"})
-public class Shop_handler extends HttpServlet{
+@WebServlet(name = "ShopServlet", urlPatterns = {"/shop"})
+public class ShopServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -3789687023451767232L;
 
@@ -27,7 +27,7 @@ public class Shop_handler extends HttpServlet{
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
 		
-		int totalProducts = Product_utils.countProducts();
+		int totalProducts = ProductUtils.countProducts();
 		
 		int totalPages = totalProducts / 8;
 		int _Page = 0;
@@ -51,7 +51,7 @@ public class Shop_handler extends HttpServlet{
 		session.setAttribute("totalpages", totalPages);		
 		session.setAttribute("curpage", _Page);
 		try {
-			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
+			session.setAttribute("products", ProductUtils.retriveProducts(_StartID, _EndID));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block rimuovere
 			e.printStackTrace();

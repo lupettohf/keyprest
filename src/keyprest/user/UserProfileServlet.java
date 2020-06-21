@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-@WebServlet(name = "UserProfile_handler", urlPatterns = {"/user"})
-public class UserProfile_handler extends HttpServlet{
+@WebServlet(name = "UserProfileServlet", urlPatterns = {"/user"})
+public class UserProfileServlet extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
@@ -45,7 +45,7 @@ public class UserProfile_handler extends HttpServlet{
 			ArrayList<Order> orders = new ArrayList<Order>();
 			
 			try {
-				orders = Orders_utils.fetchUserOrders(User_utils.getUser(SessionKey).getID());
+				orders = OrdersUtils.fetchUserOrders(UserUtils.getUser(SessionKey).getID());
 			
 				if(!orders.isEmpty() || orders != null)
 				{
@@ -86,7 +86,7 @@ public class UserProfile_handler extends HttpServlet{
 		if(!(Password.isEmpty() || Password_confim.isEmpty() || Old_password.isEmpty()) && Password.equals(Password_confim))
 		{
 			try {
-				if(User_utils.changePassword(Session_Key, Old_password, Password)) {
+				if(UserUtils.changePassword(Session_Key, Old_password, Password)) {
 					// Restituisce il messaggio di successo
 					session.setAttribute("success", "Password impostata.");				
 				} else {
@@ -101,7 +101,7 @@ public class UserProfile_handler extends HttpServlet{
 		if(!Realname.isEmpty())
 		{
 			try {
-				if(User_utils.setRealName(Session_Key, Realname)) 
+				if(UserUtils.setRealName(Session_Key, Realname)) 
 				{
 					session.setAttribute("success", "Nome impostato");			
 				} else {
@@ -115,7 +115,7 @@ public class UserProfile_handler extends HttpServlet{
 		if(!Billing_address.isEmpty())
 		{
 			try {
-				if(User_utils.setBillingAddress(Session_Key, Billing_address)) 
+				if(UserUtils.setBillingAddress(Session_Key, Billing_address)) 
 				{
 					session.setAttribute("success", "Indirizzo di fatturazione impostato");			
 				} else {

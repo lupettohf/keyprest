@@ -22,8 +22,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
-@WebServlet(name = "Product_handler", urlPatterns = {"/product"})
-public class Product_handler extends HttpServlet {
+@WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
+public class ProductServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
@@ -48,7 +48,7 @@ public class Product_handler extends HttpServlet {
 		try {
 			
 			//TODO spostare try
-			product = Product_utils.productByID(_product_ID);
+			product = ProductUtils.productByID(_product_ID);
 			session.setAttribute("product", product);
 			req.include(request, response);
 		} catch (SQLException e) {

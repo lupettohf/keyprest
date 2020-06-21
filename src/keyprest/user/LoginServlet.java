@@ -21,8 +21,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
 
-@WebServlet(name = "Login_handler", urlPatterns = {"/login"})
-public class Login_handler extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -56,12 +56,12 @@ public class Login_handler extends HttpServlet {
 		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		
 		try {
-			String SessionKey = User_utils.doLogin(Username, Password);
+			String SessionKey = UserUtils.doLogin(Username, Password);
 			
 			System.out.println("User " + Username + " with sessionkey: " + SessionKey);
 			
 			if(!SessionKey.equals("false") && !SessionKey.isEmpty()) { 
-				User user = User_utils.getUser(SessionKey);
+				User user = UserUtils.getUser(SessionKey);
 				session.setAttribute("logged", "true"); 
 				session.setAttribute("sessionkey", SessionKey);
 				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }

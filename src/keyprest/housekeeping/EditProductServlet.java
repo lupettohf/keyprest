@@ -14,11 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import keyprest.database.connectionManager;
 import keyprest.store.Product;
-import keyprest.store.Product_utils;
-import keyprest.user.User_utils;
+import keyprest.store.ProductUtils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "EditProduct_handler", urlPatterns = {"/editproduct"})
-public class EditProduct_handler extends HttpServlet{
+@WebServlet(name = "EditProductServlet", urlPatterns = {"/editproduct"})
+public class EditProductServlet extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
 	}
@@ -41,8 +41,8 @@ public class EditProduct_handler extends HttpServlet{
 		
 		if((Product_ID != 0)) { System.out.println(Product_ID);}
 		try {
-			if(SessionKey.isEmpty() || !(User_utils.isAdmin(SessionKey))) { 
-				if(Product_utils.updateProduct(Product_ID, new Product(
+			if(SessionKey.isEmpty() || !(UserUtils.isAdmin(SessionKey))) { 
+				if(ProductUtils.updateProduct(Product_ID, new Product(
 						0, 
 						Product_name, 
 						Product_service,

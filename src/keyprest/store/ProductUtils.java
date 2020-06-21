@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import keyprest.database.connectionManager;
 import keyprest.store.Product;
 
-public class Product_utils {
+public class ProductUtils {
 
 	/*
 	 * Cerca un prodotto tramite l'id e ne restituisce i dati. 

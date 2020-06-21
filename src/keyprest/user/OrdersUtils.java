@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import keyprest.database.connectionManager;
 import keyprest.store.CartItem;
 
-public class Orders_utils {
+public class OrdersUtils {
 	
 	public static ArrayList<Order> fetchUserOrders(int user_id)
 	{

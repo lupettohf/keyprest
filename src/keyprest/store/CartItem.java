@@ -43,7 +43,7 @@ public class CartItem {
 	public String productName()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getName();
+			return ProductUtils.productByID(this.product_id).getName();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class CartItem {
 	public String productDescription()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getDescription();
+			return ProductUtils.productByID(this.product_id).getDescription();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class CartItem {
 	public float productPrice()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getPrice();
+			return ProductUtils.productByID(this.product_id).getPrice();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +75,7 @@ public class CartItem {
 	public String productRegion()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getRegion();
+			return ProductUtils.productByID(this.product_id).getRegion();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,7 +85,7 @@ public class CartItem {
 	public float productDiscountPrice()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getDiscountPrice();
+			return ProductUtils.productByID(this.product_id).getDiscountPrice();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +95,7 @@ public class CartItem {
 	public int productDiscountPercetage()
 	{
 		try {
-			return Product_utils.productByID(this.product_id).getDiscount();
+			return ProductUtils.productByID(this.product_id).getDiscount();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

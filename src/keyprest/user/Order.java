@@ -2,7 +2,7 @@ package keyprest.user;
 
 import java.sql.SQLException;
 
-import keyprest.store.Product_utils;
+import keyprest.store.ProductUtils;
 
 public class Order {
 	
@@ -49,7 +49,7 @@ public class Order {
 	public String getProductName()
 	{
 		try {
-			return Product_utils.productByID(product_id).getName();
+			return ProductUtils.productByID(product_id).getName();
 		} catch (SQLException e) {
 			// TODO RIMUOVERE TRY 
 			// TODO Auto-generated catch block     
@@ -60,7 +60,7 @@ public class Order {
 	
 	public String getKey()
 	{
-		return Orders_utils.getKey(key_id);
+		return OrdersUtils.getKey(key_id);
 	}
 	
 }

@@ -14,11 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import keyprest.database.connectionManager;
 import keyprest.store.Product;
-import keyprest.store.Product_utils;
-import keyprest.user.User_utils;
+import keyprest.store.ProductUtils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "CreateProduct_handler", urlPatterns = {"/createproduct"})
-public class CreateProduct_handler extends HttpServlet{
+@WebServlet(name = "CreateProductServlet", urlPatterns = {"/createproduct"})
+public class CreateProductServlet extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
@@ -32,7 +32,7 @@ public class CreateProduct_handler extends HttpServlet{
 		if(SessionKey == null)
 		{
 			response.sendRedirect("login");
-		} else if(User_utils.isAdmin(SessionKey)) {
+		} else if(UserUtils.isAdmin(SessionKey)) {
 			
 		} else {
 			response.sendRedirect("user");
@@ -54,10 +54,10 @@ public class CreateProduct_handler extends HttpServlet{
 		HttpSession session = request.getSession();
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
-		if(SessionKey == null || !User_utils.isAdmin(SessionKey)) { return; }
+		if(SessionKey == null || !UserUtils.isAdmin(SessionKey)) { return; }
 	
 		try {
-			if(Product_utils.addNewProduct(new Product(
+			if(ProductUtils.addNewProduct(new Product(
 					0, 
 					Product_name, 
 					Product_service,

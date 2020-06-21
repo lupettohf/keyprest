@@ -24,11 +24,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import keyprest.store.Product;
-import keyprest.store.Product_utils;
-import keyprest.user.User_utils;
+import keyprest.store.ProductUtils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "KeyImporter_handler", urlPatterns = {"/importkeys"})
-public class KeyImporter_handler extends HttpServlet{
+@WebServlet(name = "KeyImporterServlet", urlPatterns = {"/importkeys"})
+public class KeyImporterServlet extends HttpServlet{
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class KeyImporter_handler extends HttpServlet{
 		
 		if(_ProductID <=0) {session.setAttribute("error", "L'id prodotto é errato."); }
 		
-		if(SessionKey == null || !(User_utils.isAdmin(SessionKey)))
+		if(SessionKey == null || !(UserUtils.isAdmin(SessionKey)))
 		{
 			 System.out.println(Keys + "0");
 			if(Keys.isEmpty()) {
@@ -81,7 +81,7 @@ public class KeyImporter_handler extends HttpServlet{
 			  String line = scanner.nextLine();
 			  System.out.println(line);
 			  try {
-				if(Product_utils.importKey(product_id, line)) {_imported++;}
+				if(ProductUtils.importKey(product_id, line)) {_imported++;}
 			} catch (SQLException e) {
 				System.out.println(e.toString());
 				e.printStackTrace();

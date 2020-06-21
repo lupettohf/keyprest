@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import keyprest.database.connectionManager;
 import keyprest.user.User;
-import keyprest.user.User_utils;
+import keyprest.user.UserUtils;
 import keyprest.utils.Validators;
 
-public class Cart_utils {
+public class CartUtils {
 	
 	public static ArrayList<CartItem> getCartItems(String session_key) 
 	{
@@ -18,10 +18,10 @@ public class Cart_utils {
 		int _id = 0;
 		
 		try {
-			if(User_utils.getUser(session_key) == null) {
+			if(UserUtils.getUser(session_key) == null) {
 				return null;
 			}else{
-				_id = User_utils.getUser(session_key).getID();
+				_id = UserUtils.getUser(session_key).getID();
 			}
 		
 			if(_id > 0) {
@@ -58,10 +58,10 @@ public class Cart_utils {
 		int _id = 0;
 		
 		try {
-			if(User_utils.getUser(session_key) == null) {
+			if(UserUtils.getUser(session_key) == null) {
 				return 0;
 			}else{
-				_id = User_utils.getUser(session_key).getID();
+				_id = UserUtils.getUser(session_key).getID();
 			}
 		
 			if(_id > 0) {
@@ -92,10 +92,10 @@ public class Cart_utils {
 		int _id = 0;
 		
 		try {
-			if(Product_utils.productByID(product_id) == null  || User_utils.getUser(session_key) == null) {
+			if(ProductUtils.productByID(product_id) == null  || UserUtils.getUser(session_key) == null) {
 				return false;
 			}else{
-				_id = User_utils.getUser(session_key).getID();
+				_id = UserUtils.getUser(session_key).getID();
 			}
 		
 			if(_id > 0)
@@ -119,10 +119,10 @@ public class Cart_utils {
 		int _id = 0;
 		
 		try {
-			if(User_utils.getUser(session_key) == null) {
+			if(UserUtils.getUser(session_key) == null) {
 				return false;
 			}else{
-				_id = User_utils.getUser(session_key).getID();
+				_id = UserUtils.getUser(session_key).getID();
 			}
 		
 			if(_id > 0)

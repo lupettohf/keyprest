@@ -6,19 +6,19 @@
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />    
 
- <% 
- 	//Controlla che l'utente sia giá loggato, e nel caso manda un redirect. 
-    String LoggedIn = (String) session.getAttribute("logged");
- 	String SessionKey = (String) session.getAttribute("sessionkey");
-    if (LoggedIn == "false" || LoggedIn == null) {
-    	response.sendRedirect("login.jsp");
-    } else {
-    	User user = User_utils.getUser(SessionKey);
-    	pageContext.setAttribute("username", user.getUsername());
-    	pageContext.setAttribute("realname", user.getRealName());
-    	pageContext.setAttribute("billingaddr", user.getBillingAddress());
-    }
- %>
+ <%
+     	//Controlla che l'utente sia giá loggato, e nel caso manda un redirect. 
+         String LoggedIn = (String) session.getAttribute("logged");
+      	String SessionKey = (String) session.getAttribute("sessionkey");
+         if (LoggedIn == "false" || LoggedIn == null) {
+         	response.sendRedirect("login.jsp");
+         } else {
+         	User user = UserUtils.getUser(SessionKey);
+         	pageContext.setAttribute("username", user.getUsername());
+         	pageContext.setAttribute("realname", user.getRealName());
+         	pageContext.setAttribute("billingaddr", user.getBillingAddress());
+         }
+     %>
     
       <div class="cart-table-area section-padding-100">
             <div class="container-fluid">

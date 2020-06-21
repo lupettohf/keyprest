@@ -16,11 +16,11 @@ import javax.servlet.http.HttpSession;
 
 import keyprest.database.connectionManager;
 import keyprest.store.Product;
-import keyprest.store.Product_utils;
-import keyprest.user.User_utils;
+import keyprest.store.ProductUtils;
+import keyprest.user.UserUtils;
 
-@WebServlet(name = "Housekeeping_handler", urlPatterns = {"/housekeeping"})
-public class Housekeeping_handler extends HttpServlet{
+@WebServlet(name = "HousekeepingServlet", urlPatterns = {"/housekeeping"})
+public class HousekeepingServlet extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 		connectionManager.createConnection();
@@ -40,7 +40,7 @@ public class Housekeeping_handler extends HttpServlet{
 		
 		if(SessionKey != null)
 		{
-			if(User_utils.isAdmin(SessionKey)) {
+			if(UserUtils.isAdmin(SessionKey)) {
 				
 				int _StartID = 0;
 				int _EndID = 0;
@@ -85,7 +85,7 @@ public class Housekeeping_handler extends HttpServlet{
 		Product Current_Product;
 		
 		try {
-			Current_Product = Product_utils.productByID(Product_ID);
+			Current_Product = ProductUtils.productByID(Product_ID);
 			session.setAttribute("product", Current_Product);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class Housekeeping_handler extends HttpServlet{
 	}
 	
 	private void setPage(HttpServletRequest request, HttpSession session, int _StartID, int _EndID) {
-		int totalProducts = Product_utils.countProducts();
+		int totalProducts = ProductUtils.countProducts();
 		
 		int totalPages = totalProducts / 10;
 		int _Page = 0;
@@ -115,7 +115,7 @@ public class Housekeeping_handler extends HttpServlet{
 		session.setAttribute("curpage", _Page);
 		
 		try {
-			session.setAttribute("products", Product_utils.retriveProducts(_StartID, _EndID));
+			session.setAttribute("products", ProductUtils.retriveProducts(_StartID, _EndID));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block rimuovere
 			e.printStackTrace();

@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-@WebServlet(name = "Register_handler", urlPatterns = {"/register"})
-public class Register_handler extends HttpServlet{
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
+public class RegisterServlet extends HttpServlet{
 	
 	public void init(ServletConfig config) throws ServletException {
 			connectionManager.createConnection();
@@ -42,7 +42,7 @@ public class Register_handler extends HttpServlet{
 		HttpSession session = request.getSession();
 		
 		try {
-			if(User_utils.createUser(Username, Password, Password_confim, EMail)) 
+			if(UserUtils.createUser(Username, Password, Password_confim, EMail)) 
 			{
 				RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 				req.include(request, response);
