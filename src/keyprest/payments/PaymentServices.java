@@ -106,7 +106,6 @@ public class PaymentServices {
         	  res.sendRedirect("user"); 
           }
         } catch (PayPalRESTException | IOException e) {
-          System.err.println(e.getDetails());
         }
     }
 }
