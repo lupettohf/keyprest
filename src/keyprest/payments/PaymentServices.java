@@ -30,7 +30,10 @@ public class PaymentServices {
     }
     
     public void processPayment(HttpServletRequest request, HttpServletResponse response, String SessionKey, ArrayList<CartItem> cart) {
-		PrintWriter out = response.getWriter();
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+
     	RedirectUrls redirectUrls = new RedirectUrls();
     	Payer payer = new Payer();
     	Payment payment = new Payment();
@@ -93,7 +96,10 @@ public class PaymentServices {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
     
     public void completePayment(HttpServletRequest req, HttpServletResponse res) {
