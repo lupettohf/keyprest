@@ -18,7 +18,10 @@ import keyprest.user.UserUtils;
 
 @WebServlet(name = "AuthorizePaymentServlet", urlPatterns = {"/paypalAuthorize"})
 public class AuthorizePaymentServlet extends HttpServlet{
-
+	
+	private final static String CLIENT_ID = "Ae21ksvTCEqOuELhv_n5mf4oX2S_T-VkiMbd7_rK17Ts5f48DOt7RAZWgjBqQkG6-fGZrIf-OxTE3WcN";
+	private final static String CLIENT_SECRET = "EC_4sc99xjXwy5YSsdLtFMwHPcJ5Jkq2f5Ft3kBuROdeYmXfKIdIIGo7xynoHE2nUZyJC4QPbsCqhltq";
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		doPost(request, response);
 	}
@@ -30,26 +33,24 @@ public class AuthorizePaymentServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
-		try {
-			if(SessionKey != null || UserUtils.getUser(SessionKey) != null) {
+		if(SessionKey != null || UserUtils.getUser(SessionKey) != null) {
+		
+			cart_items = CartUtils.getCartItems(SessionKey);
 			
-				cart_items = CartUtils.getCartItems(SessionKey);
-				
-				if(cart_items == null) { response.sendRedirect("login"); } 
-				if(!cart_items.isEmpty())
-				{
-		            PaymentServices paymentServices = new PaymentServices();
-		            String approvalLink = paymentServices.authorizePayment(cart_items, SessionKey);
-		            out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
-		            //response.sendRedirect(approvalLink);
-				}
+			if(cart_items == null) { response.sendRedirect("login"); } 
+			if(!cart_items.isEmpty())
+			{
+		        PaymentServices paymentService;
+		        if (request.getParameter("PayerID") != null) {
+		            paymentService = new PaymentServices(CLIENT_ID,CLIENT_SECRET,"sandbox");
+		            paymentService.completePayment(request, response);
+		             
+		        } else {
+		            paymentService = new PaymentServices(CLIENT_ID,CLIENT_SECRET,"sandbox");
+		            paymentService.processPayment(request, response, SessionKey, cart_items);
+		        }
 			}
-        } catch (PayPalRESTException ex) {
-            request.setAttribute("error", ex.getMessage());
-            ex.printStackTrace();
-            out.println(ex.toString());
-            request.getRequestDispatcher("/skeletons/pages/payment_error.jsp").forward(request, response);
-        }
+		}
 	}
 }
 
