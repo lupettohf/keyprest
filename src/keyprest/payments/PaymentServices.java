@@ -1,5 +1,6 @@
 package keyprest.payments;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PaymentServices {
     }
     
     public void processPayment(HttpServletRequest request, HttpServletResponse response, String SessionKey, ArrayList<CartItem> cart) {
-        
+		PrintWriter out = response.getWriter();
     	RedirectUrls redirectUrls = new RedirectUrls();
     	Payer payer = new Payer();
     	Payment payment = new Payment();
@@ -47,6 +48,7 @@ public class PaymentServices {
       
         for(CartItem item: cart)
         {
+        	out.println(item.productName());
         	transaction = new Transaction();
         	
         	float _total = 0;
@@ -77,8 +79,9 @@ public class PaymentServices {
          
         try {       	
           Payment createdPayment = payment.create(apiContext);          
- 
+          out.println("dssssssdsds");
           Iterator<Links> links = createdPayment.getLinks().iterator();
+          out.println(links.toString());
           while (links.hasNext()) {
             Links link = links.next();
             if (link.getRel().equalsIgnoreCase("approval_url")) {
