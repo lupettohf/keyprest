@@ -15,8 +15,8 @@ import keyprest.user.UserUtils;
 
 public class PaymentServices {
 
-    private static final String CLIENT_ID = "Your_PayPal_Client_ID";
-    private static final String CLIENT_SECRET = "Your_PayPal_Client_Secret";
+    private static final String CLIENT_ID = "Ae21ksvTCEqOuELhv_n5mf4oX2S_T-VkiMbd7_rK17Ts5f48DOt7RAZWgjBqQkG6-fGZrIf-OxTE3WcN";
+    private static final String CLIENT_SECRET = "EC_4sc99xjXwy5YSsdLtFMwHPcJ5Jkq2f5Ft3kBuROdeYmXfKIdIIGo7xynoHE2nUZyJC4QPbsCqhltq";
     private static final String MODE = "sandbox";
  
     public String authorizePayment(List<CartItem> orderDetail, String sessionKey)        
