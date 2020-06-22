@@ -15,7 +15,7 @@ import keyprest.store.CartUtils;
 import keyprest.store.Checkout_utils;
 import keyprest.user.UserUtils;
 
-@WebServlet(name = "CreateProductServlet", urlPatterns = {"/paypalAuthorize"})
+@WebServlet(name = "AuthorizePaymentServlet", urlPatterns = {"/paypalAuthorize"})
 public class AuthorizePaymentServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
