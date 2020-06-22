@@ -55,15 +55,18 @@ public class PaymentServices {
         	transaction = new Transaction();
         	
         	float _total = 0;
-        	float _subTotal = 0;
-        	float _tax  = (_subTotal*22)/100;
-        	_subTotal = item.productDiscountPrice() + _subTotal;
+        	float _subTotal = 0;     	
         	
+        	_subTotal = item.productDiscountPrice() + _subTotal;
+            
+        	float _tax  = (_subTotal*22)/100;
+        	
+        	out.println(_subTotal);
             details.setSubtotal(String.valueOf(_subTotal));
             details.setTax(String.valueOf(_tax));
-        
-            _total = _total+_tax;
-        
+            
+            _total = _total+_tax;        
+            
             amount.setCurrency("EUR");
             amount.setTotal(String.valueOf(_total));
             amount.setDetails(details);    
