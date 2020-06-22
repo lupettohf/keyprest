@@ -64,6 +64,7 @@ public class PaymentServices {
         	out.println(_subTotal);
             details.setSubtotal(String.valueOf(_subTotal));
             details.setTax(String.valueOf(_tax));
+            details.setShipping(""+0);
             
             _total = _total+_tax;        
             
