@@ -112,7 +112,7 @@ public class Product {
 			finalprice = finalprice - (finalprice * this.DiscountPercentage / 100);
 			
 			return finalprice;
-		} else { return 0; } 
+		} else { return this.Price; } 
 	}
 }
 

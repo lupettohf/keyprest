@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import keyprest.database.connectionManager;
 import keyprest.user.User;
 import keyprest.user.UserUtils;
@@ -49,6 +51,18 @@ public class CartUtils {
 		} catch (SQLException e) {}
 		
 		return null;
+	}
+	
+	public static float getCartSubtotal(List<CartItem> cart)
+	{
+		float _subtotal = 0;
+		
+		for(CartItem item: cart)
+		{
+			_subtotal = _subtotal + item.productDiscountPrice();
+		}
+		
+		return _subtotal;
 	}
 	
 	public static int getCartElements(String session_key)
