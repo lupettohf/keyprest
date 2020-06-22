@@ -40,7 +40,7 @@ public class AuthorizePaymentServlet extends HttpServlet{
 				{
 		            PaymentServices paymentServices = new PaymentServices();
 		            String approvalLink = paymentServices.authorizePayment(cart_items, SessionKey);
-		            out.println(approvalLink);
+		            out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
 		            //response.sendRedirect(approvalLink);
 				}
 			}
