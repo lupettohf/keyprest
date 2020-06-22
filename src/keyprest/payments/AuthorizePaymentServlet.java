@@ -1,6 +1,7 @@
 package keyprest.payments;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -26,6 +27,7 @@ public class AuthorizePaymentServlet extends HttpServlet{
 		
 		ArrayList<CartItem> cart_items = new ArrayList<CartItem>();
 		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		try {
@@ -38,13 +40,14 @@ public class AuthorizePaymentServlet extends HttpServlet{
 				{
 		            PaymentServices paymentServices = new PaymentServices();
 		            String approvalLink = paymentServices.authorizePayment(cart_items, SessionKey);
-		 
-		            response.sendRedirect(approvalLink);
+		            out.println(approvalLink);
+		            //response.sendRedirect(approvalLink);
 				}
 			}
         } catch (PayPalRESTException ex) {
             request.setAttribute("error", ex.getMessage());
             ex.printStackTrace();
+            out.println(ex.toString());
             request.getRequestDispatcher("/skeletons/pages/payment_error.jsp").forward(request, response);
         }
 	}
