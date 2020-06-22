@@ -92,6 +92,7 @@ public class PaymentServices {
             }
           }
         } catch (PayPalRESTException e) {
+            out.println(e.getDetails());
             System.err.println(e.getDetails());
         } catch (IOException e) {
             e.printStackTrace();
