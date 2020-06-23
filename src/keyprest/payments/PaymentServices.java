@@ -67,7 +67,7 @@ public class PaymentServices {
             details.setTax(String.valueOf(_tax));
             details.setShipping(""+0);
             
-            _total = _total+_tax;        
+            _total = _subTotal+_tax;        
             
             amount.setCurrency("EUR");
             amount.setTotal(String.valueOf(_total));
