@@ -64,7 +64,7 @@ public class PaymentServices {
         
         _total = _subTotal + _tax;       
         
-        amount.setCurrency("EUR");
+        amount.setCurrency("USD");
         amount.setTotal(String.valueOf(_total));
         amount.setDetails(details);    
         
