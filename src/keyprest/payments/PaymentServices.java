@@ -20,6 +20,8 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
 import keyprest.store.CartItem;
+import keyprest.store.CartUtils;
+import keyprest.store.Checkout_utils;
 import keyprest.store.ProductUtils;
  
 public class PaymentServices {
@@ -55,8 +57,7 @@ public class PaymentServices {
     	
         for(CartItem item: cart)
         {
-        	_subTotal = _subTotal + item.productDiscountPrice(); 
-            
+        	_subTotal = _subTotal + item.productDiscountPrice();           
         }
         
         _tax = (_subTotal*22)/100;
@@ -103,7 +104,7 @@ public class PaymentServices {
 		}
     }
     
-    public void completePayment(HttpServletRequest req, HttpServletResponse res) {
+    public void completePayment(HttpServletRequest req, HttpServletResponse res, String SessionKey, ArrayList<CartItem> cart) {
         Payment payment = new Payment();
         payment.setId(req.getParameter("paymentId"));
  
@@ -113,7 +114,10 @@ public class PaymentServices {
           Payment createdPayment = payment.execute(apiContext, paymentExecution);
           if(createdPayment.getState().contains("approved"))
           {
-        	  res.sendRedirect("user"); 
+        	  if(Checkout_utils.processCart(cart, SessionKey))
+        	  {
+        		  res.sendRedirect("orders");
+        	  }       	  
           }
         } catch (PayPalRESTException | IOException e) {
         }

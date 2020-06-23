@@ -9,16 +9,17 @@ import keyprest.database.connectionManager;
 
 public class Checkout_utils {
 
-	public static boolean processCart(ArrayList<CartItem> cart)
+	public static boolean processCart(ArrayList<CartItem> cart, String SessionKey)
 	{
 		if(cart == null) {return false;}
 		
 		for(CartItem item: cart)
 		{
-			System.out.println("Item Id:" + item.getItemID() + " User ID: " + item.getUserID());
 			if(!assignProduct(item.getItemID(), item.getUserID()))
 			{
 				return false;
+			} else { 
+				 CartUtils.deleteFromCart(SessionKey, item.getCartID());
 			}
 		}
 		return true;	

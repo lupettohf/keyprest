@@ -43,7 +43,7 @@ public class AuthorizePaymentServlet extends HttpServlet{
 		        PaymentServices paymentService;
 		        if (request.getParameter("PayerID") != null) {
 		            paymentService = new PaymentServices(CLIENT_ID,CLIENT_SECRET,"sandbox");
-		            paymentService.completePayment(request, response);
+		            paymentService.completePayment(request, response, SessionKey, cart_items);
 		             
 		        } else {
 		            paymentService = new PaymentServices(CLIENT_ID,CLIENT_SECRET,"sandbox");
