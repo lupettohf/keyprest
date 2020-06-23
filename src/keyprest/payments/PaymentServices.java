@@ -21,7 +21,7 @@ import com.paypal.base.rest.PayPalRESTException;
 
 import keyprest.store.CartItem;
 import keyprest.store.CartUtils;
-import keyprest.store.Checkout_utils;
+import keyprest.store.CheckoutUtils;
 import keyprest.store.ProductUtils;
  
 public class PaymentServices {
@@ -114,7 +114,7 @@ public class PaymentServices {
           Payment createdPayment = payment.execute(apiContext, paymentExecution);
           if(createdPayment.getState().contains("approved"))
           {
-        	  if(Checkout_utils.processCart(cart, SessionKey))
+        	  if(CheckoutUtils.processCart(cart, SessionKey))
         	  {
         		  res.sendRedirect("orders");
         	  }       	  

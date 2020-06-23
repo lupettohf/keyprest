@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import keyprest.database.connectionManager;
 
-public class Checkout_utils {
+public class CheckoutUtils {
 
 	public static boolean processCart(ArrayList<CartItem> cart, String SessionKey)
 	{

@@ -13,7 +13,7 @@ import com.paypal.base.rest.PayPalRESTException;
 
 import keyprest.store.CartItem;
 import keyprest.store.CartUtils;
-import keyprest.store.Checkout_utils;
+import keyprest.store.CheckoutUtils;
 import keyprest.user.UserUtils;
 
 @WebServlet(name = "AuthorizePaymentServlet", urlPatterns = {"/paypalAuthorize"})
