@@ -39,7 +39,7 @@ public class PaymentServices {
     	Payment payment = new Payment();
     	Details details = new Details();
     	Amount amount = new Amount();
-    	Transaction transaction;
+    	Transaction transaction = new Transaction();
     	List<Transaction> transactions = new ArrayList<Transaction>();
     	
     	payer.setPaymentMethod("paypal");
@@ -49,36 +49,31 @@ public class PaymentServices {
         redirectUrls.setCancelUrl("http://localhost:8080/paypalrestintegration/cancel");
         redirectUrls.setReturnUrl("http://localhost:8080/paypalrestintegration/PaypalDirectPayment");
       
+    	float _total = 0;
+    	float _subTotal = 0;     
+    	float _tax = 0; 
+    	
         for(CartItem item: cart)
         {
-        	out.println(item.productName());
-        	transaction = new Transaction();
-        	
-        	float _total = 0;
-        	float _subTotal = 0;     	
-        	
-        	_subTotal = item.productDiscountPrice();
+        	_subTotal = _subTotal + item.productDiscountPrice(); 
             
-        	float _tax  = (_subTotal*22)/100;
-        	
-        	out.println(_subTotal);
-        	details.setShipping("");
-        	details.setSubtotal(String.valueOf(_subTotal));
-            details.setTax(String.valueOf(_tax));
-            details.setShipping(""+0);
-            
-            _total = _subTotal+_tax;        
-            
-            amount.setCurrency("EUR");
-            amount.setTotal(String.valueOf(_total));
-            amount.setDetails(details);    
-            
-            transaction.setAmount(amount);
-            transaction.setDescription(item.productName());
- 
-            transactions.add(transaction);
         }
-       
+        
+        _tax = (_subTotal*22)/100;
+        
+        _total = _subTotal + _tax;       
+        
+        amount.setCurrency("EUR");
+        amount.setTotal(String.valueOf(_total));
+        amount.setDetails(details);    
+        
+        transaction.setAmount(amount);
+        transaction.setDescription("Keyprest Purchase");
+        
+      	details.setSubtotal(String.valueOf(_subTotal));
+        details.setTax(String.valueOf(_tax));  
+        
+        transactions.add(transaction);
         
         payment.setIntent("sale");
         payment.setPayer(payer);
