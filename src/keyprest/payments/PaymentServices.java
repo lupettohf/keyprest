@@ -64,16 +64,15 @@ public class PaymentServices {
         
         _total = _subTotal + _tax;       
         
+      	details.setSubtotal(String.valueOf(_subTotal).replace(",", "."));
+        details.setTax(String.valueOf(_tax).replace(",", "."));  
+        
         amount.setCurrency("USD");
-        amount.setTotal(String.valueOf(_total));
+        amount.setTotal(String.valueOf(_total).replace(",", "."));
         amount.setDetails(details);    
         
         transaction.setAmount(amount);
         transaction.setDescription("Keyprest Purchase");
-        
-      	details.setSubtotal(String.valueOf(_subTotal));
-        details.setTax(String.valueOf(_tax));  
-        
         transactions.add(transaction);
       
         payment.setIntent("sale");
@@ -82,8 +81,7 @@ public class PaymentServices {
         payment.setTransactions(transactions);  
          
         try {       	
-          Payment createdPayment = payment.create(apiContext);          
-          out.println("dssssssdsds");
+          Payment createdPayment = payment.create(apiContext);                    
           Iterator<Links> links = createdPayment.getLinks().iterator();
           out.println(links.toString());
           while (links.hasNext()) {
@@ -94,6 +92,7 @@ public class PaymentServices {
           }
         } catch (PayPalRESTException e) {
             out.println(e.getDetails());
+            out.println(amount.getTotal());
             System.err.println(e.getDetails());
         } catch (IOException e) {
             e.printStackTrace();
