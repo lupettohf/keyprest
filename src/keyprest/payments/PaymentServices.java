@@ -57,12 +57,13 @@ public class PaymentServices {
         	float _total = 0;
         	float _subTotal = 0;     	
         	
-        	_subTotal = item.productDiscountPrice() + _subTotal;
+        	_subTotal = item.productDiscountPrice();
             
         	float _tax  = (_subTotal*22)/100;
         	
         	out.println(_subTotal);
-            details.setSubtotal(String.valueOf(_subTotal));
+        	details.setShipping("");
+        	details.setSubtotal(String.valueOf(_subTotal));
             details.setTax(String.valueOf(_tax));
             details.setShipping(""+0);
             
