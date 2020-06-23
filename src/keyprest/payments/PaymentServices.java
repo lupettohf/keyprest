@@ -46,8 +46,8 @@ public class PaymentServices {
         
         // TODO CONFIG Redirect URLS
         
-        redirectUrls.setCancelUrl("http://localhost:8080/paypalrestintegration/cancel");
-        redirectUrls.setReturnUrl("http://localhost:8080/paypalrestintegration/PaypalDirectPayment");
+        redirectUrls.setCancelUrl("http://192.168.1.200:8080/keyprest/cancel");
+        redirectUrls.setReturnUrl("http://192.168.1.200:8080/keyprest/paypalAuthorize");
       
     	float _total = 0;
     	float _subTotal = 0;     
@@ -74,7 +74,7 @@ public class PaymentServices {
         details.setTax(String.valueOf(_tax));  
         
         transactions.add(transaction);
-        
+      
         payment.setIntent("sale");
         payment.setPayer(payer);
         payment.setRedirectUrls(redirectUrls);
