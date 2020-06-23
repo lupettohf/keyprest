@@ -64,11 +64,11 @@ public class PaymentServices {
         
         _total = _subTotal + _tax;       
         
-      	details.setSubtotal(String.valueOf(_subTotal).replace(",", "."));
-        details.setTax(String.valueOf(_tax).replace(",", "."));  
+      	details.setSubtotal(String.format("%.2f", _subTotal).replace(",", "."));
+        details.setTax(String.format("%.2f", _tax).replace(",", "."));  
         
         amount.setCurrency("USD");
-        amount.setTotal(String.valueOf(_total).replace(",", "."));
+        amount.setTotal(String.format("%.2f", _total).replace(",", "."));
         amount.setDetails(details);    
         
         transaction.setAmount(amount);
