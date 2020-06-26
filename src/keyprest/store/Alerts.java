@@ -12,9 +12,6 @@ public class Alerts {
 	
 	public static void setAlert(String Message, AlertType Type, HttpSession session)
 	{ 
-	    session.removeAttribute("error");
-	    session.removeAttribute("info");
-		session.removeAttribute("success");
 		switch(Type)
 		{
 			case ERROR:
