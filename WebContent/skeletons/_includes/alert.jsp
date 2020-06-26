@@ -9,17 +9,17 @@
 	String Success = (String) session.getAttribute("success");
 %>
 
-<% if(!Error.isEmpty()){ %>
+<% if(Error != null){ %>
 <div class="alert alert-danger" role="alert">
 	${Error}
 </div>
 <% } %> 
-<% if(!Info.isEmpty()){ %>
+<% if(Info != null){ %>
 <div class="alert alert-primary" role="alert">
 	${Info}
 </div>
 <% } %> 
-<% if(!Success.isEmpty()){ %>
+<% if(Success != null){ %>
 <div class="alert alert-success" role="alert">
 	${Success}
 </div>
