@@ -24,9 +24,3 @@
 	<%= Success %>
 </div>
 <% } %> 
-
-<% 
-    session.removeAttribute("error");
-    session.removeAttribute("info");
-	session.removeAttribute("success");
-%>
