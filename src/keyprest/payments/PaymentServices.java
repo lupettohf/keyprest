@@ -107,7 +107,7 @@ public class PaymentServices {
           {
         	  if(CheckoutUtils.processCart(cart, SessionKey))
         	  {
-        		  Alerts.setAlert("Payment id:" + createdPayment.getId() + " has been verified.", AlertType.ERROR, session);
+        		  Alerts.setAlert("Payment id:" + createdPayment.getId() + " has been verified.", AlertType.INFO, req.getSession());
         		  res.sendRedirect("orders");
         	  }       	  
           }
