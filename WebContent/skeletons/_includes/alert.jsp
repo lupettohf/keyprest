@@ -4,9 +4,9 @@
 <%@page import="keyprest.store.*"%>
 
 <% 
-    String Error = (String) session.getAttribute("error");
-	String Info = (String) session.getAttribute("info");
-	String Success = (String) session.getAttribute("success");
+    pageContext.setAttribute("Error", (String) session.getAttribute("error"));
+	pageContext.setAttribute("Info", (String) session.getAttribute("info"));
+	pageContext.setAttribute("Success", (String) session.getAttribute("success"));
 %>
 
 <c:if test="${ Error != null }">
