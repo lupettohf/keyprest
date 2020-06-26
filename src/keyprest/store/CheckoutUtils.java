@@ -7,18 +7,19 @@ import java.util.ArrayList;
 
 import keyprest.database.connectionManager;
 
-public class Checkout_utils {
+public class CheckoutUtils {
 
-	public static boolean processCart(ArrayList<CartItem> cart)
+	public static boolean processCart(ArrayList<CartItem> cart, String SessionKey)
 	{
 		if(cart == null) {return false;}
 		
 		for(CartItem item: cart)
 		{
-			System.out.println("Item Id:" + item.getItemID() + " User ID: " + item.getUserID());
 			if(!assignProduct(item.getItemID(), item.getUserID()))
 			{
 				return false;
+			} else { 
+				 CartUtils.deleteFromCart(SessionKey, item.getCartID());
 			}
 		}
 		return true;	
@@ -47,7 +48,7 @@ public class Checkout_utils {
 					_finalprice = _finalprice - (_finalprice * _discount / 100);
 				}
 			}else { return false;}
-			System.out.println("Product is " + _p.getName() + " price " + _p.getPrice());
+
 			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
 			preparedStatement.setInt(1, user_id);
@@ -55,8 +56,6 @@ public class Checkout_utils {
 			preparedStatement.setFloat(3, _finalprice);
 		
 			_keyid = retriveKey(product_id);
-			
-			System.out.println("Key id is " + _keyid);
 			
 			if(_keyid == 0) { return false; } 
 

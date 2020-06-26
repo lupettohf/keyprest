@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import keyprest.utils.Validators;
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
+import keyprest.store.Alerts;
+import keyprest.store.Alerts.AlertType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -45,10 +47,11 @@ public class RegisterServlet extends HttpServlet{
 			if(UserUtils.createUser(Username, Password, Password_confim, EMail)) 
 			{
 				RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
+				Alerts.setAlert("Successfully registred", AlertType.SUCCESS, session);
 				req.include(request, response);
 			} else {
 				RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/register.jsp");
-				session.setAttribute("error", "Registration Failed");	
+				Alerts.setAlert("Registration failed. Check details.", AlertType.ERROR, request.getSession());
 				req.include(request, response);
 			}
 		} catch (ClassNotFoundException | SQLException e) {

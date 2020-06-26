@@ -11,7 +11,7 @@
                             <div class="cart-title">
                                 <h2>Login to Keyprest</h2>
                             </div>
-
+							<jsp:include page="../_includes/alert.jsp" />
                             <form action="login" method="post">
                                 <div class="row">
                                     <div class="col-10 mb-3">

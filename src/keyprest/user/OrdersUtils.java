@@ -28,7 +28,7 @@ public class OrdersUtils {
 				while(rs.next())
 				{
 					_orders.add(new Order(
-							rs.getInt("id"),
+							rs.getInt("order_id"),
 							rs.getInt("product_id"),
 							rs.getInt("user"),
 							rs.getFloat("final_price"),

@@ -20,6 +20,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import keyprest.utils.Globals;
 import keyprest.database.connectionManager;
+import keyprest.store.Alerts;
+import keyprest.store.Alerts.AlertType;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
@@ -56,17 +58,13 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		
 		try {
-			String SessionKey = UserUtils.doLogin(Username, Password);
-			
-			System.out.println("User " + Username + " with sessionkey: " + SessionKey);
+			String SessionKey = UserUtils.doLogin(Username, Password);			
 			
 			if(!SessionKey.equals("false") && !SessionKey.isEmpty()) { 
 				User user = UserUtils.getUser(SessionKey);
 				session.setAttribute("logged", "true"); 
 				session.setAttribute("sessionkey", SessionKey);
-				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }
-				
-				System.out.println("User logged (" + user.getUsername() + ") with id: " + user.getID());
+				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }						
 				
 				response.sendRedirect("user");
 			} else {
@@ -74,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("login");
 				
 				// Setta il testo dell'errore nella sessione
-				session.setAttribute("error", "Login Failed");
+				Alerts.setAlert("Wrong username or password.", AlertType.ERROR, session);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

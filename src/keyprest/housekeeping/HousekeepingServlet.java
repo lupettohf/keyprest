@@ -35,8 +35,7 @@ public class HousekeepingServlet extends HttpServlet{
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		String Action = request.getParameter("action");
 		String ProductID = request.getParameter("id");
-		String Page = request.getParameter("p");
-		
+		String Page = request.getParameter("p");		
 		
 		if(SessionKey != null)
 		{

@@ -12,6 +12,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-12">
+                    	<jsp:include page="../_includes/alert.jsp" />
                         <div class="cart-title mt-20">
                             <h2>Your Orders</h2>
                         </div>
@@ -35,7 +36,7 @@
                                             <h6>${item.getProductName()}</h6>
                                         
                                         <td style="flex: 0 0 15%;">
-                                            <span> getFinalPrice()</span>
+                                            <span>{item.getFinalPrice()}</span>
                                         </td>
                                        	<td style="flex: 0 0 15%;">
                                     		<input type="text" class="form-control" id="product_name" name="product_key" placeholder="Product Key" value="${ item.getKey() }">
