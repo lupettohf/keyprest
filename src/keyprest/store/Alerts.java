@@ -21,7 +21,7 @@ public class Alerts {
 				session.setAttribute("info", Message);
 				break;
 			case SUCCESS:
-				session.setAttribute("sucess", Message);
+				session.setAttribute("success", Message);
 				break;
 			default:
 				return;		

@@ -11,17 +11,17 @@
 
 <% if(Error != null){ %>
 <div class="alert alert-danger" role="alert">
-	${Error}
+	<%= Error %>
 </div>
 <% } %> 
 <% if(Info != null){ %>
 <div class="alert alert-primary" role="alert">
-	${Info}
+	<%= Info %>
 </div>
 <% } %> 
 <% if(Success != null){ %>
 <div class="alert alert-success" role="alert">
-	${Success}
+	<%= Success %>
 </div>
 <% } %> 
 
