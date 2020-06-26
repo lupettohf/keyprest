@@ -12,6 +12,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-12">
+                    	<jsp:include page="../_includes/alert.jsp" />
                         <div class="cart-title mt-20">
                             <h2>Your Orders</h2>
                         </div>

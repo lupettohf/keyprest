@@ -24,8 +24,6 @@ public class IndexServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(ProductUtils.countKeysStock(1));	
-		
 		HttpSession session = request.getSession();
 		RequestDispatcher req = null;
 		

@@ -67,9 +67,9 @@ public class CartUtils {
 	
 	public static int getCartElements(String session_key)
 	{
-		String QUERY = "SELECT COUNT(*) AS incart FROM `cart` WHERE user_id = ?";
+		String QUERY = "SELECT COUNT(*) AS cart FROM `cart` WHERE user_id = ?";
 		
-		int _id = 0;
+		int _id = 0; 
 		
 		try {
 			if(UserUtils.getUser(session_key) == null) {

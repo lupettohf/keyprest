@@ -19,10 +19,12 @@ import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
+import keyprest.store.Alerts;
 import keyprest.store.CartItem;
 import keyprest.store.CartUtils;
 import keyprest.store.CheckoutUtils;
 import keyprest.store.ProductUtils;
+import keyprest.store.Alerts.AlertType;
  
 public class PaymentServices {
     private APIContext apiContext;
@@ -32,10 +34,6 @@ public class PaymentServices {
     }
     
     public void processPayment(HttpServletRequest request, HttpServletResponse response, String SessionKey, ArrayList<CartItem> cart) {
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-
     	RedirectUrls redirectUrls = new RedirectUrls();
     	Payer payer = new Payer();
     	Payment payment = new Payment();
@@ -83,7 +81,7 @@ public class PaymentServices {
         try {       	
           Payment createdPayment = payment.create(apiContext);                    
           Iterator<Links> links = createdPayment.getLinks().iterator();
-          out.println(links.toString());
+        
           while (links.hasNext()) {
             Links link = links.next();
             if (link.getRel().equalsIgnoreCase("approval_url")) {
@@ -91,16 +89,10 @@ public class PaymentServices {
             }
           }
         } catch (PayPalRESTException e) {
-            out.println(e.getDetails());
-            out.println(amount.getTotal());
             System.err.println(e.getDetails());
         } catch (IOException e) {
             e.printStackTrace();
         }
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
     }
     
     public void completePayment(HttpServletRequest req, HttpServletResponse res, String SessionKey, ArrayList<CartItem> cart) {
@@ -115,6 +107,7 @@ public class PaymentServices {
           {
         	  if(CheckoutUtils.processCart(cart, SessionKey))
         	  {
+        		  Alerts.setAlert("Payment id:" + createdPayment.getId() + " has been verified.", AlertType.ERROR, session);
         		  res.sendRedirect("orders");
         	  }       	  
           }

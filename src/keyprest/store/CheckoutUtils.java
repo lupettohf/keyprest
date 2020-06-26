@@ -48,7 +48,7 @@ public class CheckoutUtils {
 					_finalprice = _finalprice - (_finalprice * _discount / 100);
 				}
 			}else { return false;}
-			System.out.println("Product is " + _p.getName() + " price " + _p.getPrice());
+
 			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
 			preparedStatement.setInt(1, user_id);
@@ -56,8 +56,6 @@ public class CheckoutUtils {
 			preparedStatement.setFloat(3, _finalprice);
 		
 			_keyid = retriveKey(product_id);
-			
-			System.out.println("Key id is " + _keyid);
 			
 			if(_keyid == 0) { return false; } 
 
