@@ -4,26 +4,26 @@
 <%@page import="keyprest.store.*"%>
 
 <% 
-    pageContext.setAttribute("Error", (String) session.getAttribute("error"));
-	pageContext.setAttribute("Info", (String) session.getAttribute("info"));
-	pageContext.setAttribute("Success", (String) session.getAttribute("success"));
+    String Error = (String) session.getAttribute("error");
+    String Info = (String) session.getAttribute("info");
+	String Success = (String) session.getAttribute("success");
 %>
 
-<c:if test="${Error}">
+<% if(!Error.isEmpty()){ %>
 <div class="alert alert-danger" role="alert">
 	${Error}
 </div>
-</c:if>
-<c:if test="${Info}">
+<% } %> 
+<% if(!Info.isEmpty()){ %>
 <div class="alert alert-primary" role="alert">
 	${Info}
 </div>
-</c:if>
-<c:if test="${Success}">
+<% } %> 
+<% if(!Success.isEmpty()){ %>
 <div class="alert alert-success" role="alert">
 	${Success}
 </div>
-</c:if>
+<% } %> 
 
 <% 
 	session.removeAttribute("error");
