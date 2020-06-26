@@ -9,17 +9,17 @@
 	pageContext.setAttribute("Success", (String) session.getAttribute("success"));
 %>
 
-<c:if test="${ Error != null }">
+<c:if test="${Error}">
 <div class="alert alert-danger" role="alert">
 	${Error}
 </div>
 </c:if>
-<c:if test="${ Info != null }">
+<c:if test="${Info}">
 <div class="alert alert-primary" role="alert">
 	${Info}
 </div>
 </c:if>
-<c:if test="${ Success != null }">
+<c:if test="${Success}">
 <div class="alert alert-success" role="alert">
 	${Success}
 </div>
