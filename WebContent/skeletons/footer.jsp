@@ -17,9 +17,3 @@
 </body>
 
 </html>
-
-<% 
-    session.removeAttribute("error");
-    session.removeAttribute("info");
-	session.removeAttribute("success");
-%>
