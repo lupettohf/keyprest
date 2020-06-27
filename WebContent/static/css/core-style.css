@@ -989,7 +989,7 @@ img {
     .single-products-catagory .hover-content .line {
       width: 80px;
       height: 3px;
-      background-color: #393e46;
+      background-color: #919299;
       display: block;
       margin-bottom: 15px; }
     .single-products-catagory .hover-content p {
@@ -1005,7 +1005,6 @@ img {
       -webkit-transition-duration: 250ms;
       transition-duration: 250ms; }
   .single-products-catagory:hover a::after, .single-products-catagory:focus a::after {
-    opacity: 1;
     visibility: visible; }
   .single-products-catagory:hover .hover-content p,
   .single-products-catagory:hover .hover-content h4, .single-products-catagory:focus .hover-content p,
