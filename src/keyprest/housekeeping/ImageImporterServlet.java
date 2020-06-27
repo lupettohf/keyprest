@@ -72,9 +72,8 @@ public class ImageImporterServlet extends HttpServlet {
 					if(contentType.contains("image")){
 						part.write(uploadFilePath + File.separator + fileName);
 					}
-						
-					response.sendRedirect("housekeeping");
 				}
 			}
+			response.sendRedirect("housekeeping");
 	    }
 }
