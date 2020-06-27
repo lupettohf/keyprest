@@ -68,9 +68,11 @@ public class ImageImporterServlet extends HttpServlet {
 				if (part != null && part.getSize() > 0) {
 					String fileName = ProductID + ".png";
 					String contentType = part.getContentType();
-					
-					if(contentType.contains("image")){
-						part.write(uploadFilePath + File.separator + fileName);
+					if(contentType != null)
+					{ 
+						if(contentType.contains("image")){
+							part.write(uploadFilePath + File.separator + fileName);
+						}
 					}
 				}
 			}
