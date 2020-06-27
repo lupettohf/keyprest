@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keyprest</groupId>
   <artifactId>keyprest</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.5-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>KeyprestWebStore</name>
   <description>Ecommerce CMS for activation products</description>
