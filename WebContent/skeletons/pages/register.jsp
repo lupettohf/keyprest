@@ -13,7 +13,6 @@
                                 <h2>Register to Keyprest</h2>
                             </div>
 							<jsp:include page="../_includes/alert.jsp" />
-							<% Alerts.resetAlert(session); %>
                             <form action="register" method="post">
                                 <div class="row">
                                     <div class="col-10 mb-3">
