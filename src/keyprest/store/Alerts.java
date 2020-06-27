@@ -11,12 +11,7 @@ public class Alerts {
 	}
 	
 	public static void setAlert(String Message, AlertType Type, HttpSession session)
-	{ 
-		
-		session.setAttribute("error", "");
-		session.setAttribute("info", "");
-		session.setAttribute("success", "");
-		
+	{ 	
 		switch(Type)
 		{
 			case ERROR:
@@ -33,4 +28,10 @@ public class Alerts {
 		}
 	}
 	
+	public static void resetAlert(HttpSession session)
+	{
+		session.removeAttribute("error");
+		session.removeAttribute("info");
+		session.removeAttribute("success");
+	}
 }

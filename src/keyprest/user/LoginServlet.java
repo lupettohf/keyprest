@@ -46,8 +46,7 @@ public class LoginServlet extends HttpServlet {
 			 req = request.getRequestDispatcher("/skeletons/pages/login.jsp");
 		} else {
 			 req = request.getRequestDispatcher("/skeletons/pages/user.jsp");
-		}
-				
+		}		
 		req.include(request, response);
 	}
 	

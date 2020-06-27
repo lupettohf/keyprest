@@ -30,3 +30,5 @@
 </div>
 <% } %> 
 <% } %> 
+
+<% Alerts.resetAlert(session); %>
