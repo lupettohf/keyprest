@@ -14,10 +14,10 @@
                         <img src="static/images/products/${product.getID()}.png" alt=""> 
                         <div class="hover-content">
                             <div class="line"></div>
-                            <c:if test="${product.getDiscountPrice() > 0}">
+                            <c:if test="${product.getDiscount() > 0}">
                             <p>${product.getDiscountPrice()}$ <b>(${product.getDiscount()}% off!)</b></p>
                             </c:if>
-							<c:if test="${product.getDiscountPrice() == 0}">
+							<c:if test="${product.getDiscount() == 0}">
         					<p>${product.getPrice()}$</p>
         					</c:if>
                             <h4>${product.getName()}</h4>
