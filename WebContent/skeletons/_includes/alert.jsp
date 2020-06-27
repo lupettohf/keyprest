@@ -9,23 +9,17 @@
 %>
 
 <% if(Error != null){ %>
-<% if(!Error.isEmpty()) {%>
 <div class="alert alert-danger" role="alert">
 	<%= Error %>
 </div>
 <% } %> 
-<% } %> 
 <% if(Info != null){ %>
-<% if(!Info.isEmpty()) {%>
 <div class="alert alert-primary" role="alert">
 	<%= Info %>
 </div>
 <% } %> 
-<% } %> 
 <% if(Success != null){ %>
-<% if(!Info.isEmpty()) {%>
 <div class="alert alert-success" role="alert">
 	<%= Success %>
 </div>
-<% } %> 
 <% } %> 
