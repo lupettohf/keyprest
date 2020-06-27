@@ -43,7 +43,7 @@ maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
 public class ImageImporterServlet extends HttpServlet {
 	
-	private final String UPLOAD_DIRECTORY = "/static/images/products";
+	private final String UPLOAD_DIRECTORY = "/static/img/products";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
@@ -64,7 +64,6 @@ public class ImageImporterServlet extends HttpServlet {
 				uploadFolder.mkdirs();
 			}
 			
-			PrintWriter writer = response.getWriter();
 			for (Part part : request.getParts()) {
 				if (part != null && part.getSize() > 0) {
 					String fileName = ProductID + ".png";
@@ -74,11 +73,7 @@ public class ImageImporterServlet extends HttpServlet {
 						part.write(uploadFilePath + File.separator + fileName);
 					}
 						
-					writer.append("File successfully uploaded to " 
-							+ uploadFolder.getAbsolutePath() 
-							+ File.separator
-							+ fileName
-							+ "<br>\r\n");
+					response.sendRedirect("housekeeping");
 				}
 			}
 	    }

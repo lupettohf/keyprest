@@ -10,8 +10,7 @@
 <c:forEach var="product" items="${products}">
                 <div class="single-products-catagory clearfix">
                     <a href="product?id=${product.getID()}">
-                        <!-- <img src="static/img/bg-img/${product.getID()}.png" alt=""> -->
-                        <img src="static/images/products/${product.getID()}.png" alt=""> 
+                        <img src="static/img/products/${product.getID()}.png" alt=""> 
                         <div class="hover-content">
                             <div class="line"></div>
                             <c:if test="${product.getDiscount() > 0}">
