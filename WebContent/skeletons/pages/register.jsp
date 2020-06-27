@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="keyprest.store.*"%>
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />    
     
@@ -12,6 +13,7 @@
                                 <h2>Register to Keyprest</h2>
                             </div>
 							<jsp:include page="../_includes/alert.jsp" />
+							<% Alerts.resetAlert(session); %>
                             <form action="register" method="post">
                                 <div class="row">
                                     <div class="col-10 mb-3">
