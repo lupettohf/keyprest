@@ -24,10 +24,10 @@
                             <div class="product-description d-flex align-items-center justify-content-between">
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-<c:if test="${product.getDiscountPrice() > 0}">
+<c:if test="${product.getDiscount() > 0}">
                             <p class="product-price">${product.getDiscountPrice()}$ <b>(${product.getDiscount()}% off!)</b></p>
                             </c:if>
-<c:if test="${product.getDiscountPrice() == 0}">
+<c:if test="${product.getDiscount() == 0}">
         					<p class="product-price">${product.getPrice()}$</p>
 </c:if>
                                     <a href="product?id=${product.getID()}">
