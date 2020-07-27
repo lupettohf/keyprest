@@ -37,7 +37,7 @@
                                             <h6>${item.getProductName()}</h6>
                                         
                                         <td style="flex: 0 0 15%;">
-                                            <span>{item.getFinalPrice()}</span>
+                                            <span>${item.getFinalPrice()}</span>
                                         </td>
                                        	<td style="flex: 0 0 15%;">
                                     		<input type="text" class="form-control" id="product_name" name="product_key" placeholder="Product Key" value="${ item.getKey() }">
