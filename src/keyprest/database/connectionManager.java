@@ -10,7 +10,7 @@ public class connectionManager {
 	public static void createConnection(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); 
-			databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/keyprest?useSSL=false", "keyprest", "keyprest");
+			databaseConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/keyprest?useSSL=false", "keyprest", "PorcodioPorcamadonna");
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO: Autogenerato, da cambiare
 			e.printStackTrace();
