@@ -23,3 +23,9 @@
 	<%= Success %>
 </div>
 <% } %> 
+
+<% 
+    Error = null;
+    Info = null;
+	Success = null;
+%>
