@@ -70,27 +70,20 @@ public class CartUtils {
 		String QUERY = "SELECT COUNT(*) AS cart FROM `cart` WHERE session_key = ?";
 		
 		try {
-			if(UserUtils.getUser(session_key) == null) {
-				return 0;
-			}else{
-				
-				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-				preparedStatement.setString(1, session_key);
+			preparedStatement.setString(1, session_key);
 		
-				ResultSet rs = preparedStatement.executeQuery();
+			ResultSet rs = preparedStatement.executeQuery();
 		
-				ArrayList<CartItem> _cart = new ArrayList<CartItem>();
-		
-				while(rs.next())
-				{
+			while(rs.next())
+			{				
 					return rs.getInt("incart");
-				}
 			}
-		
+				
 		} catch (SQLException e) {}
+		return 255;
 		
-		return 0;
 	}
 	
 	public static boolean addToCart(int product_id, String session_key)
