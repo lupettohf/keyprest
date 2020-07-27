@@ -85,7 +85,7 @@ public class CartServlet extends HttpServlet {
 					CartUtils.addToCart(Product_id, SessionKey);
 					response.setContentType("text/plain");
 				    response.setCharacterEncoding("UTF-8");
-					response.getWriter().write(CartUtils.getCartElements(SessionKey));
+					response.getWriter().write(String.valueOf(CartUtils.getCartElements(SessionKey)));
 				}
 			}
 			
