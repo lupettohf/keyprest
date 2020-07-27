@@ -21,6 +21,11 @@ import keyprest.user.UserUtils;
 
 @WebServlet(name = "HousekeepingServlet", urlPatterns = {"/housekeeping"})
 public class HousekeepingServlet extends HttpServlet{
+	
+	public void init(ServletConfig config) throws ServletException {
+		connectionManager.createConnection();
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

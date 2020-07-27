@@ -17,7 +17,7 @@ public class OrdersUtils {
 		try {
 			
 			if(user_id > 0) {
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
 				preparedStatement.setInt(1, user_id);
 		
@@ -51,7 +51,7 @@ public class OrdersUtils {
 		try {
 			
 			if(key_id > 0) {
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 				
 				preparedStatement.setInt(1, key_id);
 				
