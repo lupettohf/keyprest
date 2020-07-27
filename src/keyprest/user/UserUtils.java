@@ -27,7 +27,7 @@ public class UserUtils {
 		
 		String SessionKey = generateSecureString() + Username.toLowerCase();
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, SessionKey);
 		preparedStatement.setString(2, Username);
@@ -47,7 +47,7 @@ public class UserUtils {
 		PreparedStatement preparedStatement;
 		
 		try {
-			preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 			preparedStatement.setString(1, SessionKey);
 		
@@ -84,9 +84,8 @@ public class UserUtils {
 		/* Controllo che mail e username contengano caratteri validi e rispettino le lunghezze (L<30 L>3)*/
 		if(!Validators.ValidateEmail(EMail) || !Validators.ValidateUsername(Username)) { return false; }
 		
-		if(connectionManager.databaseConnection.isClosed()) { connectionManager.createConnection(); }
 			
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, Username);
 		preparedStatement.setString(2, hashPassword(Password));
@@ -104,7 +103,7 @@ public class UserUtils {
 		
 		if(Username.isEmpty() || Password.isEmpty()) { return "false"; }
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, Username);
 		preparedStatement.setString(2, hashPassword(Password));
@@ -128,7 +127,7 @@ public class UserUtils {
 		String HashedPassword = DigestUtils.sha256Hex(New_password + Globals.SALT); 
 		String HashedPassword_old = DigestUtils.sha256Hex(Old_password + Globals.SALT); 
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, HashedPassword);
 		preparedStatement.setString(2, Username);
@@ -145,7 +144,7 @@ public class UserUtils {
 		
 		if(BillingAddress.isEmpty()) { return false; }
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, BillingAddress);
 		preparedStatement.setString(2, SessionKey);
@@ -161,7 +160,7 @@ public class UserUtils {
 		
 		if(RealName.isEmpty()) { return false; }
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, RealName);
 		preparedStatement.setString(2, SessionKey);
@@ -177,7 +176,7 @@ public class UserUtils {
 		
 		try {
 		
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 			if(SessionKey.isEmpty()) { return false; }		
 		

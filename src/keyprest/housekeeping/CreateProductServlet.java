@@ -20,10 +20,6 @@ import keyprest.user.UserUtils;
 @WebServlet(name = "CreateProductServlet", urlPatterns = {"/createproduct"})
 public class CreateProductServlet extends HttpServlet{
 	
-	public void init(ServletConfig config) throws ServletException {
-		connectionManager.createConnection();
-	}
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		RequestDispatcher req = request.getRequestDispatcher("/skeletons/pages/housekeeping/createproduct.jsp");

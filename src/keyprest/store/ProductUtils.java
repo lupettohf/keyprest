@@ -17,7 +17,7 @@ public class ProductUtils {
 	{
 		String QUERY = "SELECT * FROM products WHERE product_id = ?";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setInt(1, product_ID);
 		
@@ -47,7 +47,7 @@ public class ProductUtils {
 				"(name, service, description, price, discount, region, is_dlc) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		if(product.getName().isEmpty() || product.getDescription().isEmpty() || product.getPrice() <= 0) { return false; }
 		
@@ -72,7 +72,7 @@ public class ProductUtils {
 				+ "SET name = '?', service = '?', description = '?', price = '?',  discount = '?', region = '?', is_dlc = '?'"
 				+ "WHERE product_id = ?";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setString(1, newProduct.getName());
 		preparedStatement.setInt(2, newProduct.getService());
@@ -96,7 +96,7 @@ public class ProductUtils {
 				"VALUES" + 
 				"	(?, ?, 0)";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setInt(1, product_ID);
 		preparedStatement.setString(2, Key);
@@ -114,9 +114,7 @@ public class ProductUtils {
 		
 		String QUERY = "SELECT * FROM products WHERE product_id BETWEEN ? AND ?";
 		
-		if(connectionManager.databaseConnection.isClosed()) { connectionManager.createConnection(); } 
-		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setInt(1, StartID);
 		preparedStatement.setInt(2, EndID);
@@ -150,7 +148,7 @@ public class ProductUtils {
 		String QUERY = "SELECT COUNT(*) AS products FROM `products`";
 		
 		try {
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 				
 			ResultSet r = preparedStatement.executeQuery();
 		
@@ -172,7 +170,7 @@ public class ProductUtils {
 		String QUERY = "SELECT COUNT(*) AS instock FROM `keys` WHERE product_id = ? AND sold = 0";
 		
 		try {
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 				
 			preparedStatement.setInt(1, product_id);
 

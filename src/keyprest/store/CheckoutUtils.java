@@ -49,7 +49,7 @@ public class CheckoutUtils {
 				}
 			}else { return false;}
 
-			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+			PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, product_id);
@@ -71,7 +71,7 @@ public class CheckoutUtils {
 	{
 		String QUERY = "SELECT key_id, `key` FROM `keys` WHERE product_id = ? AND sold = 0 LIMIT 1;";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		preparedStatement.setInt(1, product_id);
 		
@@ -96,7 +96,7 @@ public class CheckoutUtils {
 		
 		String QUERY = "UPDATE `keys` SET sold = '1' WHERE key_id = ?";
 		
-		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
+		PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
 		
 		try {
 			preparedStatement.setInt(1, key_id);

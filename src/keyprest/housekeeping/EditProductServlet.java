@@ -19,10 +19,6 @@ import keyprest.user.UserUtils;
 
 @WebServlet(name = "EditProductServlet", urlPatterns = {"/editproduct"})
 public class EditProductServlet extends HttpServlet{
-	public void init(ServletConfig config) throws ServletException {
-		connectionManager.createConnection();
-	}
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int Product_ID = Integer.parseInt(request.getParameter("product_id"));
 		String Product_name = request.getParameter("product_name");
@@ -38,8 +34,7 @@ public class EditProductServlet extends HttpServlet{
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		//Verifica che l'utente sia loggato e sia admin.
-		
-		if((Product_ID != 0)) { System.out.println(Product_ID);}
+	
 		try {
 			if(SessionKey.isEmpty() || !(UserUtils.isAdmin(SessionKey))) { 
 				if(ProductUtils.updateProduct(Product_ID, new Product(
