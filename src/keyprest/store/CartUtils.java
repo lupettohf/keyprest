@@ -69,19 +69,14 @@ public class CartUtils {
 	{
 		String QUERY = "SELECT COUNT(*) AS cart FROM `cart` WHERE session_key = ?";
 		
-		int _id = 0; 
-		
 		try {
 			if(UserUtils.getUser(session_key) == null) {
 				return 0;
 			}else{
-				_id = UserUtils.getUser(session_key).getID();
-			}
-		
-			if(_id > 0) {
+				
 				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-				preparedStatement.setInt(1, _id);
+				preparedStatement.setString(1, session_key);
 		
 				ResultSet rs = preparedStatement.executeQuery();
 		
