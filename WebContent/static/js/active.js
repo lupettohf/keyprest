@@ -5,7 +5,7 @@
 
     // :: 1.0 Masonary Gallery Active Code
 
-    var proCata = $('.amado-pro-catagory');
+    var proCata = $('.keyprest-pro-catagory');
     var singleProCata = ".single-products-catagory";
 
     if ($.fn.imagesLoaded) {
@@ -21,10 +21,10 @@
     }
 
     // :: 2.1 Search Active Code
-    var amadoSearch = $('.search-nav');
+    var keyprestSearch = $('.search-nav');
     var searchClose = $('.search-close');
 
-    amadoSearch.on('click', function () {
+    keyprestSearch.on('click', function () {
         $('body').toggleClass('search-wrapper-on');
     });
 
@@ -33,10 +33,10 @@
     });
 
     // :: 2.2 Mobile Nav Active Code
-    var amadoMobNav = $('.amado-navbar-toggler');
+    var keyprestMobNav = $('.keyprest-navbar-toggler');
     var navClose = $('.nav-close');
 
-    amadoMobNav.on('click', function () {
+    keyprestMobNav.on('click', function () {
         $('.header-area').toggleClass('bp-xs-on');
     });
 

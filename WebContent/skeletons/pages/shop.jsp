@@ -9,7 +9,7 @@
 <% pageContext.setAttribute("curpage", (int) session.getAttribute("curpage"));  %>
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />  
-        <div class="amado_product_area section-padding-100">
+        <div class="keyprest_product_area section-padding-100">
             <div class="container-fluid">
                 <div class="row">
 <% if(products != null){ %>
@@ -38,7 +38,7 @@
                                     	<form class="cart clearfix" method="post" action="cart">
                                				<input type="hidden" name="action" value="add_product">
   											<input type="hidden" name="product_id" value="${product.getID()}">	
-                                			<button type="submit" class="btn amado-btn">Add to cart</button>
+                                			<button type="submit" class="btn keyprest-btn">Add to cart</button>
                             			</form>
                                     </div>
                                 </div>

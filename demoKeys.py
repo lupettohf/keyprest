@@ -15,7 +15,7 @@ def populateTable(ProductID, Quantity):
     db = mysql.connector.connect(
         host="192.168.1.200",
         user="keyprest",
-        password="PorcodioPorcamadonna",
+        password="PorcodioPorckeyprestnna",
         database="keyprest"
     )
 

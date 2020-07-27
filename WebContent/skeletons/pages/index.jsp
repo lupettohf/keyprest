@@ -6,7 +6,7 @@
 
         <!-- Product Catagories Area Start -->
         <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
+            <div class="keyprest-pro-catagory clearfix">
                 <jsp:include page="../_includes/indexProduct.jsp" />
             </div>
         </div>

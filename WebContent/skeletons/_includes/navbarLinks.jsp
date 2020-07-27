@@ -22,7 +22,7 @@
     pageContext.setAttribute("logged_in", logged_in);
  %>
  
-             <nav class="amado-nav">
+             <nav class="keyprest-nav">
                 <ul>
                     <li><a href="index">Home</a></li>
                     <li><a href="shop">Shop</a></li>

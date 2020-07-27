@@ -53,7 +53,7 @@
                                        		<form method="post" action="cart">
    												<input type="hidden" name="action" value="delete_product">
   												<input type="hidden" name="cart_id" value="${item.getCartID()}">	
-        										<button type="submit" class="btn amado-btn" style="background-color: #d32020;">Delete</button>
+        										<button type="submit" class="btn keyprest-btn" style="background-color: #d32020;">Delete</button>
     										</form>
                                        	</td>
                                     </tr>
@@ -78,7 +78,7 @@
                                 <li><span>Total:</span> <span>${subtotal} $</span></li>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="paypalAuthorize" class="btn amado-btn w-100">Checkout</a>
+                                <a href="paypalAuthorize" class="btn keyprest-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>

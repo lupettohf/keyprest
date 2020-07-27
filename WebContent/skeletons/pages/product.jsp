@@ -45,7 +45,7 @@
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post" action="cart">
   								<input type="hidden" name="product_id" value="${product.getID()}">	
-                                <button type="submit" class="btn amado-btn">Add to cart</button>
+                                <button type="submit" class="btn keyprest-btn">Add to cart</button>
                             </form>
 
                         </div>

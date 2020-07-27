@@ -26,11 +26,11 @@
         <!-- Mobile Nav (max width 767px)-->
         <div class="mobile-nav">
             <!-- Navbar Brand -->
-            <div class="amado-navbar-brand">
+            <div class="keyprest-navbar-brand">
                 <a href="index"><img src="https://i.imgur.com/OiZ24CL.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
-            <div class="amado-navbar-toggler">
+            <div class="keyprest-navbar-toggler">
                 <span></span><span></span><span></span>
             </div>
         </div>
@@ -45,14 +45,14 @@
             <div class="logo">
                 <a href="index.html"><img src="https://i.imgur.com/OiZ24CL.png" alt=""></a>
             </div>
-            <!-- Amado Nav -->
+            <!-- keyprest Nav -->
 			
 			<jsp:include page="_includes/navbarLinks.jsp" />
 			
             <!-- Button Group 
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
+            <div class="keyprest-btn-group mt-30 mb-100">
+                <a href="#" class="btn keyprest-btn mb-15">%Discount%</a>
+                <a href="#" class="btn keyprest-btn active">New this week</a>
             </div>-->
             
         </header>

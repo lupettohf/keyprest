@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="col-10">
                                       <div class="cart-btn mt-100">
-                                          <input type="submit" class="btn amado-btn w-60 float-right" value="Register">
+                                          <input type="submit" class="btn keyprest-btn w-60 float-right" value="Register">
                                       </div>
                                     </div>
                                 </div>

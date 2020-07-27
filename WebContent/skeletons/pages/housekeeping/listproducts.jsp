@@ -55,10 +55,10 @@
                                     		<h5>${item.getStock()}</h5>
                                     	</td>
                                        	<td style="flex: 0 0 10%;">
-                                       		<a class="amado-btn text-center" href="housekeeping?action=edit&id=${item.getID()}"> Edit</a> 
+                                       		<a class="keyprest-btn text-center" href="housekeeping?action=edit&id=${item.getID()}"> Edit</a> 
                                        	</td>
                                        	<td style="flex: 0 0 10%;">
-                                       		<a class="amado-btn text-center" href="housekeeping?action=import&id=${item.getID()}"> Import Keys</a> 
+                                       		<a class="keyprest-btn text-center" href="housekeeping?action=import&id=${item.getID()}"> Import Keys</a> 
                                        	</td>
                                     </tr>
 </c:forEach>                           
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 				    <ul class="pagination justify-content-start mb-30">                           
-						<a class="amado-btn text-center" href="createproduct">Create Product</a> 
+						<a class="keyprest-btn text-center" href="createproduct">Create Product</a> 
                     </ul>
                </div>	
 		</div>

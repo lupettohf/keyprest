@@ -21,7 +21,7 @@
                                     <div class="col-10">
                                       <div class="cart-btn mt-100">
                                       	  <input type="hidden" id="productid" name="productid" value="${ product.getID() }">
-                                          <input type="submit" class="btn amado-btn w-60 float-right" value="Edit Product">
+                                          <input type="submit" class="btn keyprest-btn w-60 float-right" value="Edit Product">
                                       </div>
                                     </div>
                                 </div>

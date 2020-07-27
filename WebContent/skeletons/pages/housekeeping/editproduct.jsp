@@ -50,8 +50,8 @@
                                     <div class="col-10">
                                       <div class="cart-btn mt-100">
                                       	  <input type="hidden" id="product_id" name="product_id" value="${ product.getID() }">
-                                          <input type="submit" class="btn amado-btn w-60 float-right" value="Edit Product">
-                                          <a class="amado-btn text-center" href="housekeeping?action=uploadimg&id=${product.getID()}"> Upload Thumbnail</a> 
+                                          <input type="submit" class="btn keyprest-btn w-60 float-right" value="Edit Product">
+                                          <a class="keyprest-btn text-center" href="housekeeping?action=uploadimg&id=${product.getID()}"> Upload Thumbnail</a> 
                                       </div>
                                     </div>
                                 </div>
