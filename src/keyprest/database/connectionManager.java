@@ -16,7 +16,7 @@ public class connectionManager {
 	static {
         config.setJdbcUrl( "jdbc:mysql://localhost:3306/keyprest" );
         config.setUsername( "keyprest" );
-        config.setPassword( "PorcodioPorcamadonna" );
+        config.setPassword( "keyprest" );
         ds = new HikariDataSource( config );
     }
 	
