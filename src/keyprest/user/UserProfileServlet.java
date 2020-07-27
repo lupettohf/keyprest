@@ -21,9 +21,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 @WebServlet(name = "UserProfileServlet", urlPatterns = {"/user"})
 public class UserProfileServlet extends HttpServlet{
 	
-	public void init(ServletConfig config) throws ServletException {
-		connectionManager.createConnection();
-	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
