@@ -27,7 +27,7 @@ public class CartUtils {
 			}
 		
 			if(_id > 0) {
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
 				preparedStatement.setInt(1, _id);
 		
@@ -79,7 +79,7 @@ public class CartUtils {
 			}
 		
 			if(_id > 0) {
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
 				preparedStatement.setInt(1, _id);
 		
@@ -114,7 +114,7 @@ public class CartUtils {
 		
 			if(_id > 0)
 			{
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
 				preparedStatement.setInt(1, product_id);
 				preparedStatement.setInt(2, _id);
@@ -141,7 +141,7 @@ public class CartUtils {
 		
 			if(_id > 0)
 			{
-				PreparedStatement preparedStatement = connectionManager.getConnection().prepareStatement(QUERY);
+				PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 
 				preparedStatement.setInt(1, _id);
 				preparedStatement.setInt(2, cart_id);

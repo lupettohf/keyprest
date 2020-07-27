@@ -24,6 +24,10 @@ import keyprest.database.connectionManager;
 
 @WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
+
+	public void init(ServletConfig config) throws ServletException {
+		connectionManager.createConnection();
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{

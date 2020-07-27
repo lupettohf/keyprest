@@ -18,6 +18,9 @@ import keyprest.user.UserUtils;
 @WebServlet(name = "IndexServlet", urlPatterns = {"/index"})
 public class IndexServlet extends HttpServlet{
 	
+	public void init(ServletConfig config) throws ServletException {
+		connectionManager.createConnection();
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

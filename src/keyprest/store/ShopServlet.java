@@ -17,6 +17,10 @@ import keyprest.database.connectionManager;
 public class ShopServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -3789687023451767232L;
+
+	public void init(ServletConfig config) throws ServletException {
+		connectionManager.createConnection();
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
