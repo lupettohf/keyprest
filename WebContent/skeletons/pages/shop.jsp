@@ -7,6 +7,8 @@
 <% ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");  %>
 <% pageContext.setAttribute("pages", (int) session.getAttribute("totalpages"));  %>
 <% pageContext.setAttribute("curpage", (int) session.getAttribute("curpage"));  %>
+ <% String LoggedIn = (String) session.getAttribute("logged"); %>
+    
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />  
         <div class="keyprest_product_area section-padding-100">
@@ -34,6 +36,7 @@
                                         <h6>${product.getName()}</h6>
                                     </a>
                                 </div>
+                                    <% if(LoggedIn != null){ %>
                                     <div class="cart">
                                     	<form class="cart clearfix" method="post" action="cart">
                                				<input type="hidden" name="action" value="add_product">
@@ -41,6 +44,7 @@
                                 			<button type="submit" class="btn keyprest-btn">Add to cart</button>
                             			</form>
                                     </div>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

@@ -83,8 +83,7 @@ public class CartServlet extends HttpServlet {
 			{	
 				if(ProductUtils.productByID(Product_id) != null){
 					CartUtils.addToCart(Product_id, SessionKey);
-					//TODO: Aggiungere messaggi di feedback.
-					response.sendRedirect("cart");
+					response.getWriter().write(CartUtils.getCartElements(SessionKey));
 				}
 			}
 			

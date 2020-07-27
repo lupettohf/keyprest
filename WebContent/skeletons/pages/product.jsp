@@ -4,6 +4,7 @@
 <%@page import="keyprest.store.*"%>
 <%@page import="keyprest.user.*"%>
 <% Product product = (Product) session.getAttribute("product");  %>
+<% String LoggedIn = (String) session.getAttribute("logged"); %>
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />
 
@@ -18,7 +19,6 @@
                     </div>
                     <div class="col-12 col-lg-5">
                         <div class="single_product_desc">
-                            <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <c:if test="${product.getDiscountPrice() > 0}">
@@ -27,8 +27,7 @@
                             	<c:if test="${product.getDiscountPrice() == 0}">
         						<p class="product-price">${product.getPrice()}$</p>
         						</c:if>
-                                <h6>${product.getName()}</h6>
-                                <!-- Avaiable -->
+                                <h6>${product.getName()}</h6>                         
                                 <c:if test="${product.getStock() > 0}">
                                 <p class="avaibility"><i class="fa fa-circle"></i> ${product.getStock()} Keys in stock</p>
                                 </c:if>
@@ -42,17 +41,17 @@
                                 <p><small>${product.getRegion()}</small></p>
                             </div>
 
-                            <!-- Add to Cart Form -->
+                            <% if(LoggedIn != null){ %>
                             <form class="cart clearfix" method="post" action="cart">
   								<input type="hidden" name="product_id" value="${product.getID()}">	
                                 <button type="submit" class="btn keyprest-btn">Add to cart</button>
                             </form>
+                            <% } %>
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Product Details Area End -->
     
 <jsp:include page="../footer.jsp" />
