@@ -79,7 +79,7 @@ public class CartUtils {
 		try {
 			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-			preparedStatement.setInt(1, _id);
+			preparedStatement.setInt(1, 1);
 		
 			ResultSet rs = preparedStatement.executeQuery();
 		
