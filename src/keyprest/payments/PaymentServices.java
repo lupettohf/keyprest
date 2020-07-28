@@ -46,8 +46,8 @@ public class PaymentServices {
         
         // TODO CONFIG Redirect URLS
         
-        redirectUrls.setCancelUrl("http://keyprest.napalm.rocks/cancel");
-        redirectUrls.setReturnUrl("http://keyprest.napalm.rocks/paypalAuthorize");
+        redirectUrls.setCancelUrl("http://keyprest.napalm.rocks/keyprest/cancel");
+        redirectUrls.setReturnUrl("http://keyprest.napalm.rocks/keyprest/paypalAuthorize");
       
     	float _total = 0;
     	float _subTotal = 0;     
