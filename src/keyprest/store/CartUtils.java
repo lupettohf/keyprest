@@ -79,13 +79,13 @@ public class CartUtils {
 		try {
 			PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);
 		
-			preparedStatement.setInt(1, 1);
+			preparedStatement.setInt(1, _id);
 		
 			ResultSet rs = preparedStatement.executeQuery();
 		
 			while(rs.next())
 			{				
-					return rs.getInt("incart");
+					return rs.getInt("cart");
 			}
 				
 		} catch (SQLException e) {}
