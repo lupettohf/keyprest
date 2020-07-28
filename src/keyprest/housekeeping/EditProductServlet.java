@@ -38,8 +38,6 @@ public class EditProductServlet extends HttpServlet{
 		String SessionKey = (String) session.getAttribute("sessionkey");
 		
 		//Verifica che l'utente sia loggato e sia admin.
-		
-		if((Product_ID != 0)) { System.out.println(Product_ID);}
 		try {
 			if(SessionKey.isEmpty() || !(UserUtils.isAdmin(SessionKey))) { 
 				if(ProductUtils.updateProduct(Product_ID, new Product(
@@ -58,5 +56,6 @@ public class EditProductServlet extends HttpServlet{
 			// TODO Auto-generated catch bloc
 			e1.printStackTrace();
 		} 
+		response.sendRedirect("housekeeping");
 	}
 }
