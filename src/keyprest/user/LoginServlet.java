@@ -65,10 +65,10 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("sessionkey", SessionKey);
 				if(user.IsAdmin()) { session.setAttribute("housekeeper", true); }						
 				
-				response.sendRedirect("user");
+				response.sendRedirect("/user");
 			} else {
 				// Reindirizza al login nel caso i dati sono errati
-				response.sendRedirect("login");
+				response.sendRedirect("/login");
 				
 				// Setta il testo dell'errore nella sessione
 				Alerts.setAlert("Wrong username or password.", AlertType.ERROR, session);
