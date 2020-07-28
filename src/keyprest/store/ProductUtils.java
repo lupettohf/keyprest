@@ -69,7 +69,7 @@ public class ProductUtils {
 	{
 		//TODO: non funziona, errore con i parameti
 		String QUERY = "UPDATE products" 
-				+ "SET name = '?', service = '?', description = '?', price = '?',  discount = '?', region = '?', is_dlc = '?'"
+				+ "SET name = ?, service = ?, description = ?, price = ?,  discount = ?, region = ?, is_dlc = ?"
 				+ "WHERE product_id = ?";
 		
 		PreparedStatement preparedStatement = connectionManager.databaseConnection.prepareStatement(QUERY);

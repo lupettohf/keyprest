@@ -348,8 +348,7 @@ img {
       z-index: 10;
       cursor: pointer;
       background-color: transparent;
-      text-align: center; }
-  .search-wrapper .search-close {
+      text-align: center; }  .search-wrapper .search-close {
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
     width: 40px;

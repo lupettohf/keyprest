@@ -46,8 +46,8 @@ public class PaymentServices {
         
         // TODO CONFIG Redirect URLS
         
-        redirectUrls.setCancelUrl("http://192.168.1.200:8080/keyprest/cancel");
-        redirectUrls.setReturnUrl("http://192.168.1.200:8080/keyprest/paypalAuthorize");
+        redirectUrls.setCancelUrl("http://keyprest.napalm.rocks/cancel");
+        redirectUrls.setReturnUrl("http://keyprest.napalm.rocks/paypalAuthorize");
       
     	float _total = 0;
     	float _subTotal = 0;     

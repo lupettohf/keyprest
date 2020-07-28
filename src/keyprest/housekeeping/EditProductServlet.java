@@ -56,6 +56,6 @@ public class EditProductServlet extends HttpServlet{
 			// TODO Auto-generated catch bloc
 			e1.printStackTrace();
 		} 
-		response.sendRedirect("housekeeping");
+		response.sendRedirect("housekeepings");
 	}
 }
