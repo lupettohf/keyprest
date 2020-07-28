@@ -23,6 +23,4 @@
  %>
 <c:if test="${logged_in}">
 <li><a href="cart">Cart <span id="cartelements">(${cartElements})</span></a></li>
-</c:if>
-            
-            
+</c:if>         

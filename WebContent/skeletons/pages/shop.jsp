@@ -7,7 +7,7 @@
 <% ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");  %>
 <% pageContext.setAttribute("pages", (int) session.getAttribute("totalpages"));  %>
 <% pageContext.setAttribute("curpage", (int) session.getAttribute("curpage"));  %>
- <% String LoggedIn = (String) session.getAttribute("logged"); %>
+<% String LoggedIn = (String) session.getAttribute("logged"); %>
     
 <jsp:include page="../header.jsp" />
 <jsp:include page="../navbar.jsp" />  
@@ -38,11 +38,7 @@
                                 </div>
                                     <% if(LoggedIn != null){ %>
                                     <div class="cart">
-                                    	<form class="cart clearfix" method="post" action="cart">
-                               				<input type="hidden" name="action" value="add_product">
-  											<input type="hidden" name="product_id" value="${product.getID()}">	
-                                			<button type="submit" class="btn keyprest-btn">Add to cart</button>
-                            			</form>
+									<button onclick='$.post("cart",{action:"add_product",product_id: ${product.getID()} }).done(function(t){$("#cartelements").text("("+t+")")});' class="btn keyprest-btn">Add to cart</button>
                                     </div>
                                     <% } %>
                                 </div>

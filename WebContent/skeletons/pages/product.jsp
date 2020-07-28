@@ -42,10 +42,7 @@
                             </div>
 
                             <% if(LoggedIn != null){ %>
-                            <form class="cart clearfix" method="post" action="cart">
-  								<input type="hidden" name="product_id" value="${product.getID()}">	
-                                <button type="submit" class="btn keyprest-btn">Add to cart</button>
-                            </form>
+                            <button onclick='$.post("cart",{action:"add_product",product_id: ${product.getID()} }).done(function(t){$("#cartelements").text("("+t+")")});' class="btn keyprest-btn">Add to cart</button>
                             <% } %>
 
                         </div>
