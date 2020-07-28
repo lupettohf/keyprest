@@ -22,7 +22,7 @@
      pageContext.setAttribute("logged_in", logged_in);
  %>
 <c:if test="${logged_in}">
-<li><a href="cart">Cart <span>(${cartElements})</span></a></li>
+<li><a href="cart">Cart <span id="cartelements">(${cartElements})</span></a></li>
 </c:if>
             
             
